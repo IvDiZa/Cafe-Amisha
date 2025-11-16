@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Gallery | Cafe Amisha</title>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Playfair+Display:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg:#f6f5f1;
+      --paper:#fffdf7;
+      --accent:#c41e3a;
+      --accent-dark:#9c172e;
+      --accent-2:#1a936f;
+      --accent-2-dark:#157a5d;
+      --muted:#6b7280;
+      --text:#222;
+      --text-light:#5a5a5a;
+      --shadow:0 10px 30px rgba(25,25,25,0.06);
+      --shadow-hover:0 15px 40px rgba(25,25,25,0.12);
+      --radius:12px;
+      --container:1100px;
+      --transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0;font-family:Montserrat,system-ui,Arial,sans-serif;color:var(--text);background:var(--bg);-webkit-font-smoothing:antialiased;line-height:1.6;}
+    a{color:var(--accent);text-decoration:none;transition:var(--transition);}
+    a:hover{color:var(--accent-dark);}
+
+    /* Header (same visual system as about page) */
+    header{background:var(--paper);box-shadow:var(--shadow);position:sticky;top:0;z-index:120;border-bottom:1px solid rgba(0,0,0,0.03);}
+    .header-inner{max-width:var(--container);margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:0.9rem 1.25rem;}
+    .logo{display:flex;align-items:center;gap:.9rem;text-decoration:none;}
+    .logo-img{height:48px;width:120px;object-fit:cover;border-radius:10px;border:1px solid #eee;transition:var(--transition);}
+    .logo:hover .logo-img{transform:scale(1.02);box-shadow:0 4px 12px rgba(196,30,58,0.1);}
+    .brand{font-family:"Playfair Display",serif;color:var(--accent);font-size:1.15rem;font-weight:700;}
+
+    nav{display:flex;align-items:center;gap:1rem;}
+    .nav-list{display:flex;gap:0.6rem;align-items:center;margin:0;padding:0;list-style:none;}
+    .nav-link{display:inline-flex;align-items:center;gap:.5rem;padding:.45rem .8rem;border-radius:10px;font-weight:600;color:var(--text);transition:var(--transition);}
+    .nav-link i{color:var(--muted);transition:var(--transition);}
+    .nav-link:hover,.nav-link:focus,.nav-link.active{background:#fff5f7;color:var(--accent);}
+    .nav-link:hover i,.nav-link:focus i,.nav-link.active i{color:var(--accent);}
+    .cta{background:linear-gradient(90deg,var(--accent-2),var(--accent-2-dark));color:#fff;padding:.45rem .9rem;border-radius:22px;font-weight:700;display:inline-flex;gap:.5rem;align-items:center;transition:var(--transition);}
+    .cta:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(26,147,111,0.2);}
+
+    #nav-toggle{display:none;border:0;background:transparent;font-size:1.2rem;padding:.35rem;border-radius:8px;cursor:pointer;color:var(--text);}
+    @media (max-width:880px){
+      #nav-toggle{display:inline-flex;}
+      .nav-list{position:absolute;right:1rem;top:68px;background:var(--paper);flex-direction:column;padding:.8rem;border-radius:12px;box-shadow:var(--shadow-hover);min-width:220px;transform:scale(.98);opacity:0;visibility:hidden;transition:all .18s;z-index:100;}
+      .nav-list.open{transform:scale(1);opacity:1;visibility:visible;}
+      .nav-link{width:100%;padding:.6rem .9rem;}
+    }
+
+    /* Hero Section */
+    .hero-section {
+      background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url("https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80");
+      background-size: cover;
+      background-position: center;
+      color: white;
+      padding: 4rem 1.25rem;
+      margin-bottom: 2rem;
+      border-radius: var(--radius);
+    }
+    .hero-content {
+      max-width: var(--container);
+      margin: 0 auto;
+      text-align: center;
+    }
+    .hero-content h1 {
+      font-family: "Playfair Display", serif;
+      font-size: 3rem;
+      margin: 0 0 1rem;
+      font-weight: 700;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+    }
+    .hero-content p {
+      font-size: 1.2rem;
+      max-width: 700px;
+      margin: 0 auto;
+      opacity: 0.9;
+    }
+    
+    /* Container & Paper */
+    .container{max-width:var(--container);margin:2rem auto;padding:0 1.25rem;}
+    .paper{background:var(--paper);border-radius:var(--radius);padding:2rem;box-shadow:var(--shadow);border:1px solid rgba(0,0,0,0.03);margin-bottom:2rem;}
+    .masthead{display:flex;align-items:flex-end;gap:1rem;margin-bottom:1.5rem;padding-bottom:1.5rem;border-bottom:1px solid rgba(0,0,0,0.05);}
+    .masthead h1{font-family:"Playfair Display",serif;font-size:2.2rem;margin:0;color:var(--accent);}
+    .masthead .lede{color:var(--muted);font-size:1.1rem;font-weight:500;}
+
+    /* Filter Buttons */
+    .filter-container {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin: 2rem 0;
+      flex-wrap: wrap;
+    }
+    
+    .filter-btn {
+      background: var(--paper);
+      border: 2px solid var(--accent);
+      color: var(--accent);
+      padding: 0.6rem 1.5rem;
+      border-radius: 30px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+    
+    .filter-btn:hover, .filter-btn.active {
+      background: var(--accent);
+      color: white;
+    }
+
+    /* Gallery Grid */
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+    
+    .gallery-item {
+      position: relative;
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      transition: var(--transition);
+      cursor: pointer;
+    }
+    
+    .gallery-item:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-hover);
+    }
+    
+    .gallery-item img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      display: block;
+      transition: var(--transition);
+    }
+    
+    .gallery-item:hover img {
+      transform: scale(1.05);
+    }
+    
+    .gallery-caption {
+      padding: 1rem;
+      background: var(--paper);
+    }
+    
+    .gallery-caption h3 {
+      margin: 0 0 0.5rem;
+      font-family: "Playfair Display", serif;
+      color: var(--accent);
+      font-size: 1.2rem;
+    }
+    
+    .gallery-caption p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    /* Modal */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.9);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+    
+    .modal-content {
+      max-width: 90%;
+      max-height: 90%;
+      position: relative;
+    }
+    
+    #modalImage {
+      width: 100%;
+      height: auto;
+      max-height: 80vh;
+      object-fit: contain;
+      border-radius: var(--radius);
+    }
+    
+    .close-modal {
+      position: absolute;
+      top: 15px;
+      right: 35px;
+      color: white;
+      font-size: 40px;
+      font-weight: bold;
+      cursor: pointer;
+      z-index: 1001;
+    }
+    
+    .modal-caption {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(0,0,0,0.7);
+      color: white;
+      padding: 1rem;
+      text-align: center;
+    }
+
+    /* Footer aligned with header styling */
+    footer{background:var(--paper);border-top:1px solid rgba(0,0,0,0.03);padding:2rem 0;margin-top:3rem;}
+    .footer-inner{max-width:var(--container);margin:0 auto;padding:0 1.25rem;display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap;color:var(--muted);}
+    .social{display:flex;gap:1rem;}
+    .social a{display:flex;align-items:center;justify-content:center;width:36px;height:36px;border-radius:50%;background:var(--bg);color:var(--muted);transition:var(--transition);}
+    .social a:hover{background:var(--accent);color:white;}
+    .copyright{font-size:.95rem;color:var(--muted);margin-top:.65rem;text-align:center;width:100%;}
+
+    /* Responsive adjustments */
+    @media (max-width:980px){
+      .gallery-grid {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      }
+    }
+    
+    @media (max-width:768px){
+      .hero-content h1{font-size:2.2rem;}
+      .hero-content p{font-size:1rem;}
+      .paper{padding:1.5rem;}
+      .gallery-grid{grid-template-columns:1fr;}
+      .filter-container {
+        gap: 0.5rem;
+      }
+      .filter-btn {
+        padding: 0.5rem 1rem;
+        font-size: 0.9rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="header-inner">
+      <a href="index.html" class="logo">
+        <img class="logo-img" src="https://th.bing.com/th/id/R.ba06966f143148b38d522236559678e9?rik=dV0BK2CcMStoVw&riu=http%3a%2f%2fwww.cafeamisha.co.uk%2fimg%2flogo-white.png&ehk=r8UsJTswgx9wplnnCnRVyVNY6kuZFqWilITSCBofBCo%3d&risl=&pid=ImgRaw&r=0" alt="Cafe Amisha">
+        <span class="brand">Cafe Amisha</span>
+      </a>
+
+      <nav aria-label="Primary">
+        <button id="nav-toggle" aria-expanded="false" aria-controls="main-nav" aria-label="Open menu">
+          <i class="fas fa-bars" aria-hidden="true"></i>
+        </button>
+
+        <ul id="main-nav" class="nav-list" role="menubar">
+          <li><a class="nav-link" href="index.html"><i class="fas fa-home"></i> Home</a></li>
+          <li><a class="nav-link" href="about.html"><i class="fas fa-info-circle"></i> About</a></li>
+          <li><a class="nav-link active" href="gallery.html"><i class="fas fa-images"></i> Gallery</a></li>
+          <li><a class="nav-link" href="contact.html"><i class="fas fa-envelope"></i> Contact</a></li>
+          <li><a class="nav-link cta" href="book.html"><i class="fas fa-calendar-check"></i> Reserve</a></li>
+          <li><a class="nav-link" href="book_venue.html"><i class="fas fa-building"></i> Venues</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <div class="hero-section">
+    <div class="hero-content">
+      <h1>Our Gallery</h1>
+      <p>Explore our delicious food, refreshing drinks, and seasonal specialties</p>
+    </div>
+  </div>
+
+  <div class="container">
+    <section class="paper" aria-labelledby="gallery-heading">
+      <div class="masthead">
+        <div>
+          <h1 id="gallery-heading">Gallery</h1>
+          <div class="lede">A visual journey through our culinary creations and seasonal offerings</div>
+        </div>
+      </div>
+
+      <div class="filter-container">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="food">Food</button>
+        <button class="filter-btn" data-filter="drinks">Drinks</button>
+        <button class="filter-btn" data-filter="seasonal">Seasonal</button>
+      </div>
+
+      <div class="gallery-grid">
+        <!-- Food Items -->
+        <div class="gallery-item" data-category="food">
+          <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ca4b?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Margherita Pizza">
+          <div class="gallery-caption">
+            <h3>Margherita Pizza</h3>
+            <p>Classic Italian pizza with fresh mozzarella and basil</p>
+          </div>
+        </div>
+        
+        <div class="gallery-item" data-category="food">
+          <img src="https://images.unsplash.com/photo-1563379926898-05f4575a45d8?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Fresh Pasta">
+          <div class="gallery-caption">
+            <h3>Fresh Pasta</h3>
+            <p>Handmade pasta with seasonal ingredients</p>
+          </div>
+        </div>
+        
+        <div class="gallery-item" data-category="food">
+          <img src="https://images.unsplash.com/photo-1476224203421-9ac39bcb3327?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Tiramisu">
+          <div class="gallery-caption">
+            <h3>Tiramisu</h3>
+            <p>Classic Italian dessert with coffee and mascarpone</p>
+          </div>
+        </div>
+        
+        <div class="gallery-item" data-category="food">
+          <img src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Antipasti Platter">
+          <div class="gallery-caption">
+            <h3>Antipasti Platter</h3>
+            <p>Selection of cured meats, cheeses, and olives</p>
+          </div>
+        </div>
+        
+        <!-- Drinks Items -->
+        <div class="gallery-item" data-category="drinks">
+          <img src="https://images.unsplash.com/photo-1551024709-8f23befc6f87?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Italian Cocktails">
+          <div class="gallery-caption">
+            <h3>Italian Cocktails</h3>
+            <p>Handcrafted cocktails with Italian spirits</p>
+          </div>
+        </div>
+        
+        <div class="gallery-item" data-category="drinks">
+          <img src="https://images.unsplash.com/photo-1544145945-f90425340c7e?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Espresso">
+          <div class="gallery-caption">
+            <h3>Espresso</h3>
+            <p>Rich Italian coffee brewed to perfection</p>
+          </div>
+        </div>
+        
+        <div class="gallery-item" data-category="drinks">
+          <img src="https://images.unsplash.com/photo-1436076863939-06870fe779c2?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Italian Wine">
+          <div class="gallery-caption">
+            <h3>Italian Wine</h3>
+            <p>Selection of fine wines from Italian vineyards</p>
+          </div>
+        </div>
+        
+        <div class="gallery-item" data-category="drinks">
+          <img src="https://images.unsplash.com/photo-1572119865084-43d6c75f4307?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Fresh Juices">
+          <div class="gallery-caption">
+            <h3>Fresh Juices</h3>
+            <p>Seasonal fruits pressed to order</p>
+          </div>
+        </div>
+        
+        <!-- Seasonal Items -->
+        <div class="gallery-item" data-category="seasonal">
+          <img src="https://images.unsplash.com/photo-1574343066865-60c2e0c5b6b9?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Christmas Special">
+          <div class="gallery-caption">
+            <h3>Christmas Special</h3>
+            <p>Festive menu available during the holiday season</p>
+          </div>
+        </div>
+        
+        <div class="gallery-item" data-category="seasonal">
+          <img src="https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Summer Menu">
+          <div class="gallery-caption">
+            <h3>Summer Menu</h3>
+            <p>Light and refreshing dishes for warmer months</p>
+          </div>
+        </div>
+        
+        <div class="gallery-item" data-category="seasonal">
+          <img src="https://images.unsplash.com/photo-1570194065650-d99fb932899a?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Autumn Special">
+          <div class="gallery-caption">
+            <h3>Autumn Special</h3>
+            <p>Comforting dishes featuring seasonal produce</p>
+          </div>
+        </div>
+        
+        <div class="gallery-item" data-category="seasonal">
+          <img src="https://images.unsplash.com/photo-1570194065650-d99fb932899a?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Spring Menu">
+          <div class="gallery-caption">
+            <h3>Spring Menu</h3>
+            <p>Fresh flavors celebrating the arrival of spring</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- Modal for enlarged images -->
+  <div class="modal" id="imageModal">
+    <div class="modal-content">
+      <span class="close-modal">&times;</span>
+      <img id="modalImage" src="" alt="">
+      <div class="modal-caption" id="modalCaption"></div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-inner">
+      <div>
+        <strong>Cafe Amisha</strong>
+        <div class="copyright">&copy; 2025 Cafe Amisha — Authentic Italian Dining in Bermondsey</div>
+      </div>
+      <div>
+        <a class="nav-link" href="contact.html"><i class="fas fa-map-marker-alt"></i> Visit</a>
+        <a class="nav-link" href="book.html"><i class="fas fa-calendar-check"></i> Reservations</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Filter functionality
+    document.addEventListener('DOMContentLoaded', function() {
+      const filterButtons = document.querySelectorAll('.filter-btn');
+      const galleryItems = document.querySelectorAll('.gallery-item');
+      
+      filterButtons.forEach(button => {
+        button.addEventListener('click', function() {
+          // Remove active class from all buttons
+          filterButtons.forEach(btn => btn.classList.remove('active'));
+          
+          // Add active class to clicked button
+          this.classList.add('active');
+          
+          const filterValue = this.getAttribute('data-filter');
+          
+          galleryItems.forEach(item => {
+            if (filterValue === 'all' || item.getAttribute('data-category') === filterValue) {
+              item.style.display = 'block';
+            } else {
+              item.style.display = 'none';
+            }
+          });
+        });
+      });
+      
+      // Modal functionality
+      const modal = document.getElementById('imageModal');
+      const modalImage = document.getElementById('modalImage');
+      const modalCaption = document.getElementById('modalCaption');
+      const closeModal = document.querySelector('.close-modal');
+      
+      galleryItems.forEach(item => {
+        item.addEventListener('click', function() {
+          const imgSrc = this.querySelector('img').getAttribute('src');
+          const imgAlt = this.querySelector('img').getAttribute('alt');
+          const caption = this.querySelector('h3').textContent;
+          const description = this.querySelector('p').textContent;
+          
+          modalImage.setAttribute('src', imgSrc);
+          modalImage.setAttribute('alt', imgAlt);
+          modalCaption.innerHTML = `<h3>${caption}</h3><p>${description}</p>`;
+          modal.style.display = 'flex';
+        });
+      });
+      
+      closeModal.addEventListener('click', function() {
+        modal.style.display = 'none';
+      });
+      
+      modal.addEventListener('click', function(e) {
+        if (e.target === modal) {
+          modal.style.display = 'none';
+        }
+      });
+      
+      // Mobile nav toggle behavior
+      (function(){
+        const toggle = document.getElementById('nav-toggle');
+        const nav = document.getElementById('main-nav');
+        if(!toggle || !nav) return;
+        toggle.addEventListener('click', () => {
+          const open = nav.classList.toggle('open');
+          toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+        });
+        // close on outside click
+        document.addEventListener('click', (e) => {
+          if(!nav.contains(e.target) && !toggle.contains(e.target) && nav.classList.contains('open')) {
+            nav.classList.remove('open');
+            toggle.setAttribute('aria-expanded','false');
+          }
+        });
+      })();
+    });
+  </script>
+</body>
+</html>

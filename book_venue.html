@@ -1,0 +1,1223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Book a Venue — Cafe Amisha</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Playfair+Display:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <style>
+    :root {
+      --primary: #c41e3a;
+      --primary-dark: #9c172e;
+      --primary-light: #fdecea;
+      --accent: #13824b;
+      --accent-dark: #0f6b3f;
+      --accent-light: #eaf8f0;
+      --text-dark: #1a1a1a;
+      --text-medium: #3d3d3d;
+      --text-light: #6b6b6b;
+      --text-muted: #8a8a8a;
+      --background: #ffffff;
+      --white: #ffffff;
+      --light-bg: #fbfbfb;
+      --border: #efefef;
+      --border-light: #f6f6f6;
+      --shadow: 0 4px 24px rgba(44, 44, 44, 0.06);
+      --shadow-light: 0 2px 12px rgba(44, 44, 44, 0.03);
+      --shadow-hover: 0 8px 32px rgba(44, 44, 44, 0.08);
+      --border-radius: 12px;
+      --border-radius-sm: 8px;
+      --transition: all 0.28s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      --transition-slow: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: var(--background);
+      color: var(--text-dark);
+      font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+      line-height: 1.7;
+      font-weight: 400;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      overflow-x: hidden;
+    }
+
+    /* ===== HEADER ===== */
+    header {
+      background: var(--white);
+      padding: 1.2rem 2.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      transition: var(--transition);
+      border-bottom: 1px solid transparent;
+      height: auto;
+    }
+
+    header.scrolled {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      box-shadow: var(--shadow);
+      border-bottom: 1px solid var(--border-light);
+      padding: 0.8rem 2.5rem;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      text-decoration: none;
+      flex-shrink: 0;
+    }
+
+    .logo-img {
+      height: 54px;
+      width: 130px;
+      border-radius: var(--border-radius-sm);
+      object-fit: cover;
+      border: 1.5px solid var(--border);
+      box-shadow: var(--shadow-light);
+      background: var(--white);
+      transition: var(--transition);
+    }
+
+    .logo:hover .logo-img {
+      transform: scale(1.02);
+      box-shadow: 0 4px 16px rgba(196, 30, 58, 0.1);
+    }
+
+    .logo h1 {
+      font-family: "Playfair Display", serif;
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--primary);
+      letter-spacing: 0.5px;
+      margin: 0;
+      line-height: 1.2;
+    }
+
+    /* Mobile Menu Toggle */
+    .menu-toggle {
+      display: none;
+      flex-direction: column;
+      background: none;
+      border: none;
+      cursor: pointer;
+      gap: 0.45rem;
+      padding: 0.5rem;
+      z-index: 1001;
+    }
+
+    .menu-toggle span {
+      width: 28px;
+      height: 3px;
+      background: var(--text-dark);
+      border-radius: 2px;
+      transition: var(--transition);
+      display: block;
+    }
+
+    .menu-toggle.active span:nth-child(1) {
+      transform: rotate(45deg) translate(10px, 10px);
+    }
+
+    .menu-toggle.active span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .menu-toggle.active span:nth-child(3) {
+      transform: rotate(-45deg) translate(7px, -7px);
+    }
+
+    nav {
+      flex: 1;
+    }
+
+    nav ul {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    nav ul li {
+      display: flex;
+      align-items: center;
+    }
+
+    nav ul li a {
+      text-decoration: none;
+      color: var(--text-medium);
+      font-weight: 500;
+      font-size: 1rem;
+      padding: 0.7rem 1.4rem;
+      border-radius: var(--border-radius-sm);
+      transition: var(--transition);
+      position: relative;
+      background: none;
+      border: none;
+      cursor: pointer;
+      outline: none;
+      font-family: inherit;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    nav ul li a::before {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      width: 0;
+      height: 2px;
+      background: var(--primary);
+      transition: var(--transition);
+      transform: translateX(-50%);
+    }
+
+    nav ul li a:hover,
+    nav ul li a:focus {
+      color: var(--primary);
+      background: var(--primary-light);
+    }
+
+    nav ul li a:hover::before,
+    nav ul li a:focus::before {
+      width: 70%;
+    }
+
+    .book-btn {
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      color: var(--white) !important;
+      border-radius: 30px;
+      padding: 0.8rem 1.6rem;
+      font-weight: 600;
+      font-size: 1rem;
+      transition: var(--transition);
+      border: none;
+      box-shadow: 0 6px 20px rgba(196, 30, 58, 0.14);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .book-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 28px rgba(196, 30, 58, 0.25);
+    }
+
+    /* ===== HERO SECTION ===== */
+    .hero {
+      height: 100vh;
+      min-height: 520px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      color: var(--white);
+      text-align: center;
+      background-color: #0b0b0b;
+      margin-top: 0;
+      padding-top: 0;
+    }
+
+    .hero-video {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center center;
+      z-index: 0;
+      transform: scale(1.06);
+      filter: contrast(0.96) saturate(0.95) brightness(0.92);
+      animation: heroPan 20s ease-in-out infinite;
+    }
+
+    @keyframes heroPan {
+      0% { transform: scale(1.06) translateY(0); }
+      50% { transform: scale(1.08) translateY(-2%); }
+      100% { transform: scale(1.06) translateY(0); }
+    }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      background: linear-gradient(180deg, rgba(0,0,0,0.28), rgba(0,0,0,0.55)),
+                  radial-gradient(60% 60% at 50% 30%, rgba(0,0,0,0) 0%, rgba(0,0,0,0.4) 70%);
+      pointer-events: none;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 920px;
+      padding: 2.25rem;
+      color: #fff;
+      text-shadow: 0 8px 30px rgba(0,0,0,0.55);
+      animation: fadeInUp 0.8s ease-out;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .hero-content .message {
+      background: linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02));
+      border: 2px solid rgba(196, 30, 58, 0.3);
+      padding: 2.5rem 2.5rem;
+      border-radius: 20px;
+      display: inline-block;
+      backdrop-filter: blur(8px);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+    }
+
+    .hero h2 {
+      font-family: "Playfair Display", serif;
+      font-size: 3.6rem;
+      margin: 0 0 1rem 0;
+      font-weight: 800;
+      letter-spacing: 1.2px;
+      line-height: 1.3;
+      color: #ffffff;
+      text-shadow: 
+          0 2px 4px rgba(0,0,0,0.5),
+          0 4px 8px rgba(0,0,0,0.4),
+          0 6px 12px rgba(0,0,0,0.3);
+      filter: brightness(1.1) contrast(1.1);
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      margin: 0 0 2rem 0;
+      color: rgba(255,255,255,0.95);
+      line-height: 1.6;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 1.2rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .hero-btn {
+      padding: 1.1rem 2.4rem;
+      border-radius: 40px;
+      font-weight: 600;
+      font-size: 1.05rem;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      border: none;
+      cursor: pointer;
+      transition: var(--transition);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    }
+
+    .hero-btn.primary {
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      color: #fff;
+    }
+
+    .hero-btn.primary:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 15px 40px rgba(196, 30, 58, 0.35);
+    }
+
+    .hero-btn.secondary {
+      background: rgba(255,255,255,0.12);
+      color: #fff;
+      border: 1.5px solid rgba(255,255,255,0.25);
+      backdrop-filter: blur(8px);
+    }
+
+    .hero-btn.secondary:hover {
+      background: rgba(255,255,255,0.18);
+      border-color: rgba(255,255,255,0.4);
+      transform: translateY(-4px);
+    }
+
+    .hero-controls {
+      position: absolute;
+      top: 22px;
+      right: 25px;
+      z-index: 3;
+      display: flex;
+      gap: 0.8rem;
+    }
+
+    .mute-btn {
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.2);
+      color: #fff;
+      padding: 0.7rem;
+      border-radius: 12px;
+      cursor: pointer;
+      backdrop-filter: blur(8px);
+      transition: var(--transition);
+      font-size: 1.1rem;
+    }
+
+    .mute-btn:hover {
+      background: rgba(255,255,255,0.18);
+      transform: scale(1.08);
+    }
+
+    /* ===== MAIN CONTENT ===== */
+    main.container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 6rem 2rem 2rem;
+    }
+
+    .section-title {
+      text-align: center;
+      margin: 0 0 3rem 0;
+      font-family: "Playfair Display", serif;
+      font-size: 2.5rem;
+      color: var(--text-dark);
+      position: relative;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+    }
+
+    .section-title::after {
+      content: '';
+      display: block;
+      width: 80px;
+      height: 4px;
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+      margin: 1rem auto 0;
+      border-radius: 2px;
+    }
+
+    .venues-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-top: 1rem;
+    }
+
+    .venue-card {
+      background: var(--white);
+      border-radius: var(--border-radius);
+      box-shadow: var(--shadow);
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      transition: var(--transition);
+      border-left: 4px solid rgba(0,0,0,0.03);
+    }
+
+    .venue-card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-hover);
+    }
+
+    .venue-media {
+      height: 200px;
+      border-radius: var(--border-radius-sm);
+      overflow: hidden;
+      background: #eee;
+      position: relative;
+    }
+
+    .venue-media img,
+    .venue-media video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .venue-media video {
+      background-color: #000;
+    }
+
+    .video-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: var(--transition);
+    }
+
+    .venue-media:hover .video-overlay {
+      opacity: 1;
+    }
+
+    .play-icon {
+      background: rgba(255,255,255,0.8);
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--primary);
+      font-size: 1.2rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+
+    .venue-title {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: .6rem;
+    }
+
+    .venue-title h3 {
+      margin: 0;
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--text-dark);
+    }
+
+    .venue-meta {
+      color: var(--text-light);
+      font-size: 1rem;
+      margin: 0.25rem 0;
+    }
+
+    .venue-features {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .5rem;
+      margin-top: .5rem;
+    }
+
+    .chip {
+      background: var(--light-bg);
+      padding: .4rem .8rem;
+      border-radius: 999px;
+      font-size: .85rem;
+      color: var(--text-light);
+      border: 1px solid var(--border);
+    }
+
+    .venue-actions {
+      margin-top: auto;
+      display: flex;
+      gap: .8rem;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: .6rem;
+      padding: .7rem 1.2rem;
+      border-radius: 10px;
+      border: 0;
+      cursor: pointer;
+      font-weight: 600;
+      transition: var(--transition);
+      text-decoration: none;
+      font-size: 0.95rem;
+    }
+
+    .btn.primary {
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      color: #fff;
+    }
+
+    .btn.primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(196, 30, 58, 0.25);
+    }
+
+    .btn.ghost {
+      background: #fff;
+      border: 1px solid var(--border);
+      color: var(--text-medium);
+    }
+
+    .btn.ghost:hover {
+      background: var(--light-bg);
+    }
+
+    .btn.call {
+      background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+      color: #fff;
+    }
+
+    .btn.call:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(19, 130, 75, 0.25);
+    }
+
+    /* modal */
+    .modal {
+      position: fixed;
+      inset: 0;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      background: rgba(10,10,10,0.65);
+      z-index: 2000;
+      padding: 1rem;
+    }
+
+    .modal.active {
+      display: flex;
+    }
+
+    .modal-panel {
+      background: var(--white);
+      width: 100%;
+      max-width: 900px;
+      border-radius: var(--border-radius);
+      padding: 1.5rem;
+      box-shadow: 0 18px 60px rgba(0,0,0,0.25);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      position: relative;
+    }
+
+    .modal-media {
+      border-radius: var(--border-radius-sm);
+      overflow: hidden;
+      height: 100%;
+      position: relative;
+    }
+
+    .modal-media img,
+    .modal-media video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .modal-media video {
+      background-color: #000;
+    }
+
+    .modal-body h3 {
+      margin: 0 0 .4rem;
+      font-size: 1.5rem;
+      color: var(--text-dark);
+    }
+
+    .modal-body p {
+      color: var(--text-medium);
+      margin: 0 0 .6rem;
+      line-height: 1.6;
+    }
+
+    .modal-close {
+      position: absolute;
+      right: 1.5rem;
+      top: 1.5rem;
+      font-size: 1.5rem;
+      background: rgba(0,0,0,0.1);
+      border: 0;
+      color: var(--text-dark);
+      padding: .4rem;
+      border-radius: 6px;
+      cursor: pointer;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: var(--transition);
+      z-index: 10;
+    }
+
+    .modal-close:hover {
+      background: rgba(0,0,0,0.15);
+    }
+
+    /* ===== FOOTER ===== */
+    footer {
+      padding: 4rem 1rem 2rem;
+      font-size: 1rem;
+      background: var(--white);
+      color: var(--text-medium);
+      border-top: 4px solid rgba(196, 30, 58, 0.06);
+    }
+
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 3rem;
+      text-align: left;
+    }
+
+    .footer-section h3 {
+      color: var(--text-dark);
+      margin-bottom: 1.5rem;
+      font-size: 1.3rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+
+    .footer-section p, .footer-section a {
+      color: var(--text-medium);
+      margin-bottom: 0.8rem;
+      display: block;
+      text-decoration: none;
+      transition: color 0.3s ease;
+      font-size: 1rem;
+      line-height: 1.6;
+    }
+
+    .footer-section a:hover {
+      color: var(--primary);
+    }
+
+    .social-links {
+      margin-top: 1.5rem;
+      display: flex;
+      gap: 1rem;
+    }
+
+    .social-links a {
+      color: var(--primary);
+      font-size: 1.1rem;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--light-bg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: var(--transition);
+    }
+
+    .social-links a:hover {
+      color: var(--white);
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+      transform: translateY(-3px);
+    }
+
+    .copyright {
+      margin-top: 3rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border);
+      text-align: center;
+      width: 100%;
+      font-size: 0.95rem;
+      color: rgba(0,0,0,0.6);
+    }
+
+    /* ===== RESPONSIVE STYLES ===== */
+    @media (max-width: 1024px) {
+      .container {
+        padding: 0 1.5rem;
+      }
+
+      .modal-panel {
+        grid-template-columns: 1fr;
+        max-height: 90vh;
+        overflow: auto;
+      }
+    }
+
+    @media (max-width: 768px) {
+      header {
+        flex-wrap: wrap;
+        padding: 1rem 1.5rem;
+      }
+
+      .menu-toggle {
+        display: flex;
+      }
+
+      nav {
+        position: fixed;
+        top: 70px;
+        left: 0;
+        right: 0;
+        background: var(--white);
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease;
+        box-shadow: var(--shadow);
+        width: 100%;
+      }
+
+      nav.active {
+        max-height: 500px;
+      }
+
+      nav ul {
+        flex-direction: column;
+        gap: 0.5rem;
+        width: 100%;
+        padding: 1rem 0;
+      }
+
+      nav ul li {
+        width: 100%;
+      }
+
+      nav ul li a {
+        width: 100%;
+        text-align: center;
+        justify-content: center;
+        padding: 1rem 1.5rem;
+      }
+
+      .container {
+        padding: 0 1rem;
+      }
+
+      .hero {
+        height: 100vh;
+        min-height: 400px;
+      }
+
+      .hero h2 {
+        font-size: 2.4rem;
+        letter-spacing: 0.8px;
+        text-shadow: 
+            0 2px 4px rgba(0,0,0,0.6),
+            0 4px 8px rgba(0,0,0,0.5);
+      }
+
+      .hero p {
+        font-size: 1rem;
+      }
+
+      .hero-actions {
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+      }
+
+      .hero-btn {
+        width: 100%;
+        max-width: 320px;
+        justify-content: center;
+      }
+
+      .hero-content .message {
+        padding: 1.8rem 1.5rem;
+      }
+
+      .section-title {
+        font-size: 1.8rem;
+      }
+
+      .venues-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .venue-actions {
+        flex-direction: column;
+      }
+
+      .footer-content {
+        grid-template-columns: 1fr;
+        text-align: center;
+        gap: 2rem;
+      }
+
+      .social-links {
+        justify-content: center;
+      }
+    }
+
+    @media (max-width: 480px) {
+      header {
+        padding: 1rem 1rem;
+      }
+
+      .logo h1 {
+        font-size: 1.4rem;
+      }
+
+      .logo-img {
+        height: 45px;
+        width: 100px;
+      }
+
+      nav {
+        top: 65px;
+      }
+
+      .hero {
+        height: 85vh;
+        min-height: 250px;
+      }
+
+      .hero h2 {
+        font-size: 1.8rem;
+        letter-spacing: 0.5px;
+      }
+
+      .hero p {
+        font-size: 0.95rem;
+      }
+
+      .hero-btn {
+        padding: 0.9rem 1.8rem;
+        font-size: 0.95rem;
+      }
+
+      .section-title {
+        font-size: 1.5rem;
+      }
+
+      .hero-content .message {
+        padding: 1.5rem 1rem;
+      }
+
+      .hero-controls {
+        top: 10px;
+        right: 10px;
+        gap: 0.5rem;
+      }
+
+      .mute-btn {
+        padding: 0.5rem;
+        font-size: 0.9rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header id="mainHeader">
+    <a href="index.html" class="logo">
+      <img class="logo-img" src="https://th.bing.com/th/id/R.ba06966f143148b38d522236559678e9?rik=dV0BK2CcMStoVw&riu=http%3a%2f%2fwww.cafeamisha.co.uk%2fimg%2flogo-white.png&ehk=r8UsJTswgx9wplnnCnRVyVNY6kuZFqWilITSCBofBCo%3d&risl=&pid=ImgRaw&r=0" alt="Cafe Amisha">
+      <h1>Cafe Amisha</h1>
+    </a>
+
+    <nav id="navMenu" aria-label="Primary">
+      <ul>
+        <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+        <li><a href="about.html"><i class="fas fa-info-circle"></i> About</a></li>
+        <li><a href="book_venue.html" class="active"><i class="fas fa-building"></i> Venues</a></li>
+        <li><a href="contact.html"><i class="fas fa-envelope"></i> Contact</a></li>
+        <li><a href="book.html" class="book-btn"><i class="fas fa-calendar-check"></i> Reserve</a></li>
+      </ul>
+    </nav>
+
+    <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation menu" aria-expanded="false">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero" aria-label="Venue booking">
+    <video class="hero-video" id="heroVideo" autoplay muted loop playsinline preload="auto" poster="hero-poster.jpg">
+      <source src="venu.mp4" type="video/mp4">
+      Your browser does not support embedded video.
+    </video>
+
+    <div class="hero-overlay" aria-hidden="true"></div>
+
+    <div class="hero-controls">
+      <button class="mute-btn" id="muteBtn" aria-pressed="true" title="Toggle video sound">
+        <i class="fas fa-volume-mute" aria-hidden="true"></i>
+      </button>
+    </div>
+
+    <div class="hero-content">
+      <div class="message">
+        <h2>Book Your Perfect Venue</h2>
+        <p>From intimate gatherings to grand celebrations, our venues offer the perfect setting for your special occasion.</p>
+        <div class="hero-actions">
+          <a href="#venues" class="hero-btn primary"><i class="fas fa-eye"></i> View Venues</a>
+          <a href="contact.html" class="hero-btn secondary"><i class="fas fa-envelope"></i> Enquire Now</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <main class="container">
+    <h2 class="section-title">Available Venues</h2>
+
+    <div id="venues" class="venues-grid" aria-live="polite">
+      <!-- Venue cards are rendered by JavaScript -->
+    </div>
+
+    <p style="margin-top:2rem;color:var(--text-light);text-align:center">To make a booking: call us at the number shown in the venue details. We'll confirm availability and take your booking by phone.</p>
+  </main>
+
+  <!-- Modal for venue details -->
+  <div id="venue-modal" class="modal" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="modal-panel" role="document">
+      <div class="modal-media" id="modal-media"></div>
+      <div class="modal-body">
+        <button id="modal-close" class="modal-close" aria-label="Close details">×</button>
+        <h3 id="modal-title"></h3>
+        <p id="modal-capacity" class="venue-meta"></p>
+        <p id="modal-desc"></p>
+
+        <div id="modal-features"></div>
+
+        <div style="margin-top:1.5rem;display:flex;gap:.8rem;align-items:center;flex-wrap:wrap;">
+          <a id="modal-call" class="btn call" href="#"><i class="fas fa-phone"></i> Call to book</a>
+          <a id="modal-back" class="btn ghost" href="contact.html"><i class="fas fa-envelope"></i> Contact us</a>
+        </div>
+        <p style="margin-top:1rem;color:var(--text-light);font-size:.95rem">Note: bookings are made by phone. Please have event date, approximate guest count and any special requirements ready when you call.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h3>Cafe Amisha</h3>
+          <p>Authentic Italian dining in the heart of Bermondsey. Experience the true taste of Italy with our seasonal, carefully sourced ingredients.</p>
+          <div class="social-links">
+            <a href="https://www.facebook.com/p/Cafe-Amisha-100063625329594/"><i class="fab fa-instagram"></i></a>
+            <a href="https://www.instagram.com/cafe_amisha/"><i class="fab fa-facebook-f"></i></a>
+          </div>
+        </div>
+        <div class="footer-section">
+          <h3>Contact Info</h3>
+          <p><i class="fas fa-map-marker-alt"></i> SE1 3GH, Grange Road, London</p>
+          <p><i class="fas fa-phone"></i> +44 20 7231 7151</p>
+          <p><i class="fas fa-envelope"></i> info@cafeamisha.com</p>
+        </div>
+        <div class="footer-section">
+          <h3>Opening Hours</h3>
+          <p>Monday: Closed</p>
+          <p>Tuesday - Saturday: 12:00pm - 10:30pm</p>
+          <p>Sunday: 12:00pm - 9:00pm</p>
+          <a href="book.html" class="book-btn" style="margin-top: 1rem; display: inline-block;">Make Reservation</a>
+        </div>
+      </div>
+      <div class="copyright">
+        <p>&copy; 2025 Cafe Amisha. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Replace this with the cafe's real phone number.
+    const CAFE_PHONE = '+44 20 7231 7151';
+    // Normalized tel link version
+    const CAFE_TEL = CAFE_PHONE.replace(/\s/g, '').replace(/[^+\d]/g, '');
+
+    // Sample venues data (edit / extend as needed)
+    const venues = [
+      {
+        id: 'venue-1',
+        title: 'Main Dining Room',
+        capacity: 'Up to 60 guests',
+        desc: 'Warm, stylish dining room with flexible seating — perfect for dinners and receptions.',
+        features: ['Full catering', 'Private space', 'AV on request', 'Wheelchair accessible'],
+        mediaType: 'image',
+        src: 'indoor_venu.jpg'
+      },
+      {
+        id: 'venue-2',
+        title: 'Outdoor Terrace',
+        capacity: 'Up to 40 guests',
+        desc: 'Airy outdoor terrace, great for summer events and relaxed receptions.',
+        features: ['Outdoor heating', 'Flexible layout', 'Al fresco dining'],
+        mediaType: 'video',
+        src: 'outdoor_venue.mp4'
+      }
+    ];
+
+    const venuesContainer = document.getElementById('venues');
+
+    function renderVenues(){
+      venuesContainer.innerHTML = '';
+      venues.forEach(v => {
+        const card = document.createElement('article');
+        card.className = 'venue-card';
+        
+        let mediaElement = '';
+        if (v.mediaType === 'video') {
+          mediaElement = `
+            <video muted loop playsinline preload="metadata">
+              <source src="${v.src}" type="video/mp4">
+              Your browser does not support embedded video.
+            </video>
+            <div class="video-overlay">
+              <div class="play-icon">
+                <i class="fas fa-play"></i>
+              </div>
+            </div>
+          `;
+        } else {
+          mediaElement = `<img src="${v.src}" alt="${v.title}">`;
+        }
+        
+        card.innerHTML = `
+          <div class="venue-media" aria-hidden="false">
+            ${mediaElement}
+          </div>
+          <div class="venue-title">
+            <h3>${v.title}</h3>
+            <span style="font-size:.95rem;color:var(--text-light)">${v.capacity}</span>
+          </div>
+          <p class="venue-meta">${v.desc}</p>
+          <div class="venue-features">${v.features.map(f => `<span class="chip">${f}</span>`).join('')}</div>
+          <div class="venue-actions">
+            <button class="btn primary" onclick="openModal('${v.id}')"><i class="fas fa-info-circle"></i> View Details</button>
+            <a class="btn call" href="tel:${CAFE_TEL}" aria-label="Call Cafe Amisha to book ${v.title}"><i class="fas fa-phone"></i> Book by phone</a>
+          </div>
+        `;
+        venuesContainer.appendChild(card);
+      });
+    }
+
+    // Modal logic
+    const modal = document.getElementById('venue-modal');
+    const modalTitle = document.getElementById('modal-title');
+    const modalDesc = document.getElementById('modal-desc');
+    const modalCapacity = document.getElementById('modal-capacity');
+    const modalFeatures = document.getElementById('modal-features');
+    const modalMedia = document.getElementById('modal-media');
+    const modalCall = document.getElementById('modal-call');
+    const modalClose = document.getElementById('modal-close');
+
+    function openModal(id){
+      const v = venues.find(x => x.id === id);
+      if(!v) return;
+      modalTitle.textContent = v.title;
+      modalDesc.textContent = v.desc;
+      modalCapacity.textContent = v.capacity;
+      modalFeatures.innerHTML = v.features.map(f => `<span class="chip">${f}</span>`).join('');
+      
+      // Set modal media based on type
+      if (v.mediaType === 'video') {
+        modalMedia.innerHTML = `
+          <video autoplay muted loop playsinline controls>
+            <source src="${v.src}" type="video/mp4">
+            Your browser does not support embedded video.
+          </video>
+        `;
+      } else {
+        modalMedia.innerHTML = `<img src="${v.src}" alt="${v.title}">`;
+      }
+      
+      modalCall.href = `tel:${CAFE_TEL}`;
+      modalCall.setAttribute('aria-label', `Call Cafe Amisha ${CAFE_PHONE} to book ${v.title}`);
+      modal.classList.add('active');
+      modal.setAttribute('aria-hidden', 'false');
+      // trap focus briefly on modal
+      setTimeout(()=> modalClose.focus(), 10);
+    }
+
+    function closeModal(){
+      modal.classList.remove('active');
+      modal.setAttribute('aria-hidden', 'true');
+      // return focus to venues list
+      document.querySelector('#venues .venue-card button')?.focus();
+    }
+
+    modalClose.addEventListener('click', closeModal);
+    modal.addEventListener('click', (e) => { if(e.target === modal) closeModal(); });
+    document.addEventListener('keydown', (e) => { if(e.key === 'Escape') closeModal(); });
+
+    // Mobile menu toggle
+    const menuToggle = document.getElementById('menuToggle');
+    const navMenu = document.getElementById('navMenu');
+    const navLinks = navMenu.querySelectorAll('a');
+
+    menuToggle.addEventListener('click', () => {
+      menuToggle.classList.toggle('active');
+      navMenu.classList.toggle('active');
+      menuToggle.setAttribute('aria-expanded', menuToggle.classList.contains('active'));
+    });
+
+    // Close menu when a link is clicked
+    navLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        menuToggle.classList.remove('active');
+        navMenu.classList.remove('active');
+        menuToggle.setAttribute('aria-expanded', 'false');
+      });
+    });
+
+    // Close menu when clicking outside
+    document.addEventListener('click', (e) => {
+      if (!e.target.closest('header')) {
+        menuToggle.classList.remove('active');
+        navMenu.classList.remove('active');
+        menuToggle.setAttribute('aria-expanded', 'false');
+      }
+    });
+
+    // Header scroll effect
+    window.addEventListener('scroll', function() {
+      const header = document.getElementById('mainHeader');
+      if (window.scrollY > 50) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+    });
+
+    // Video controls
+    (function(){
+      const heroVideo = document.getElementById('heroVideo');
+      const muteBtn = document.getElementById('muteBtn');
+
+      if (!heroVideo || !muteBtn) return;
+
+      // Respect reduced-motion
+      if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        try { heroVideo.pause(); } catch(e) {}
+      }
+
+      // Toggle video mute
+      muteBtn.addEventListener('click', () => {
+        heroVideo.muted = !heroVideo.muted;
+        muteBtn.setAttribute('aria-pressed', String(!heroVideo.muted));
+        muteBtn.innerHTML = heroVideo.muted ? 
+          '<i class="fas fa-volume-mute"></i>' : 
+          '<i class="fas fa-volume-up"></i>';
+      });
+    })();
+
+    // render on load
+    renderVenues();
+  </script>
+</body>
+</html>

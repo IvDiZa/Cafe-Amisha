@@ -1,0 +1,1191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cafe Amisha | Authentic Italian Groceries</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Playfair+Display:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    
+    :root {
+      --primary: #c41e3a;
+      --primary-dark: #9c172e;
+      --primary-light: #f9e6ea;
+      --accent: #1a936f;
+      --accent-dark: #157a5d;
+      --text-dark: #2d2d2d;
+      --text-light: #666;
+      --text-lighter: #888;
+      --background: #f8f8f8;
+      --white: #ffffff;
+      --light-bg: #f0f0f0;
+      --border: #e8e8e8;
+      --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      --shadow-light: 0 2px 8px rgba(0, 0, 0, 0.05);
+      --shadow-hover: 0 8px 24px rgba(0, 0, 0, 0.12);
+      --border-radius: 8px;
+      --border-radius-sm: 4px;
+      --transition: all 0.3s ease;
+    }
+    
+    body {
+      background-color: var(--background);
+      color: var(--text-dark);
+      font-family: "Montserrat", sans-serif;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+    
+    /* Header improvements */
+    header {
+      background: var(--white);
+      box-shadow: var(--shadow);
+      padding: 0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      transition: var(--transition);
+    }
+    
+    .top-bar {
+      background: var(--text-dark);
+      color: var(--white);
+      padding: 0.5rem 2rem;
+      font-size: 0.85rem;
+      display: flex;
+      justify-content: space-between;
+    }
+    
+    .top-bar a {
+      color: var(--white);
+      text-decoration: none;
+      transition: var(--transition);
+    }
+    
+    .top-bar a:hover {
+      color: var(--primary-light);
+    }
+    
+    .main-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 2rem;
+    }
+    
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+    }
+    
+    .logo img {
+      height: 48px;
+      width: 120px;
+      border-radius: var(--border-radius-sm);
+      object-fit: cover;
+      border: 2px solid var(--border);
+      transition: var(--transition);
+    }
+    
+    .logo h1 {
+      font-family: "Playfair Display", serif;
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--primary);
+      letter-spacing: 0.5px;
+    }
+    
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+    }
+    
+    nav ul {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    
+    nav ul li {
+      display: flex;
+      align-items: center;
+    }
+    
+    nav ul li a,
+    nav ul li .book-btn {
+      text-decoration: none;
+      color: var(--text-dark);
+      font-weight: 500;
+      font-size: 1rem;
+      padding: 0.5rem 1rem;
+      border-radius: var(--border-radius);
+      transition: var(--transition);
+      position: relative;
+      background: none;
+      border: none;
+      cursor: pointer;
+      outline: none;
+    }
+    
+    nav ul li a.active,
+    nav ul li a:hover,
+    nav ul li .book-btn:hover {
+      color: var(--primary);
+      background: var(--primary-light);
+    }
+    
+    nav ul li a::after,
+    nav ul li .book-btn::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      width: 0;
+      height: 2px;
+      background: var(--primary);
+      transition: var(--transition);
+      transform: translateX(-50%);
+    }
+    
+    nav ul li a.active::after,
+    nav ul li a:hover::after,
+    nav ul li .book-btn:hover::after {
+      width: 80%;
+    }
+    
+    .book-btn {
+      background: var(--accent);
+      color: var(--white) !important;
+      border-radius: 30px;
+      padding: 0.5rem 1.2rem;
+      font-weight: 600;
+      font-size: 1rem;
+      transition: var(--transition);
+      border: none;
+      margin-left: 0.5rem;
+    }
+    
+    .book-btn:hover {
+      background: var(--accent-dark);
+      color: var(--white) !important;
+      transform: translateY(-2px);
+      box-shadow: var(--shadow);
+    }
+    
+    #cart-btn {
+      background: var(--primary);
+      color: var(--white);
+      border: none;
+      padding: 0.6rem 1.2rem;
+      border-radius: 20px;
+      font-weight: 600;
+      cursor: pointer;
+      font-size: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: var(--transition);
+    }
+    
+    #cart-btn:hover {
+      background: var(--primary-dark);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow);
+    }
+    
+    /* Hero section improvements */
+    .hero {
+      background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
+                  url('https://images.unsplash.com/photo-1542838132-92c53300491e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
+      background-size: cover;
+      background-position: center;
+      color: var(--white);
+      text-align: center;
+      padding: 6rem 2rem;
+      margin-bottom: 3rem;
+      position: relative;
+    }
+    
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(135deg, rgba(196, 30, 58, 0.2) 0%, rgba(26, 147, 111, 0.2) 100%);
+      z-index: 1;
+    }
+    
+    .hero-content {
+      max-width: 800px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 2;
+    }
+    
+    .hero h2 {
+      font-family: "Playfair Display", serif;
+      font-size: 3rem;
+      margin-bottom: 1.5rem;
+      font-weight: 700;
+      line-height: 1.2;
+    }
+    
+    .hero p {
+      font-size: 1.2rem;
+      margin-bottom: 2rem;
+      opacity: 0.9;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    
+    .cta-btn {
+      background: var(--accent);
+      color: var(--white);
+      border: none;
+      padding: 0.9rem 2.5rem;
+      border-radius: 30px;
+      font-weight: 600;
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: var(--transition);
+      box-shadow: var(--shadow);
+    }
+    
+    .cta-btn:hover {
+      background: var(--accent-dark);
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-hover);
+    }
+    
+    /* Section title improvements */
+    .section-title {
+      text-align: center;
+      margin: 4rem 0 2.5rem;
+      font-family: "Playfair Display", serif;
+      font-size: 2.2rem;
+      color: var(--text-dark);
+      position: relative;
+      font-weight: 700;
+    }
+    
+    .section-title::after {
+      content: '';
+      display: block;
+      width: 80px;
+      height: 4px;
+      background: var(--primary);
+      margin: 0.8rem auto;
+      border-radius: 2px;
+    }
+    
+    /* Popular and seasonal sections improvements */
+    .popular, .seasonal {
+      max-width: 1200px;
+      margin: 0 auto 4rem auto;
+      padding: 2.5rem;
+      background: var(--white);
+      border-radius: var(--border-radius);
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .popular::before, .seasonal::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 5px;
+      height: 100%;
+      background: var(--primary);
+    }
+    
+    .seasonal {
+      background: linear-gradient(135deg, #ffeaea 0%, #fff5e6 100%);
+      border-left: 5px solid var(--accent);
+    }
+    
+    .seasonal::before {
+      background: var(--accent);
+    }
+    
+    .popular h3, .seasonal h3 {
+      color: var(--primary);
+      font-size: 1.6rem;
+      margin-bottom: 1.8rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    
+    .popular h3::before {
+      content: '🔥';
+    }
+    
+    .seasonal h3::before {
+      content: '🍃';
+    }
+    
+    .popular-items, .seasonal-items {
+      display: flex;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    
+    .popular-item, .seasonal-item {
+      background: var(--white);
+      border-radius: var(--border-radius);
+      box-shadow: var(--shadow-light);
+      padding: 1.5rem;
+      text-align: center;
+      width: 180px;
+      transition: var(--transition);
+      border: 1px solid var(--border);
+      position: relative;
+    }
+    
+    .popular-item:hover, .seasonal-item:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-hover);
+    }
+    
+    .popular-item img, .seasonal-item img {
+      width: 100%;
+      height: 100px;
+      object-fit: cover;
+      border-radius: var(--border-radius-sm);
+      margin-bottom: 1rem;
+    }
+    
+    .popular-item div, .seasonal-item div {
+      font-weight: 600;
+      color: var(--text-dark);
+      font-size: 0.95rem;
+    }
+    
+    /* Products section improvements */
+    .products-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+    
+    .products-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 2rem;
+    }
+    
+    .products-header h2 {
+      font-family: "Playfair Display", serif;
+      font-size: 2.2rem;
+      color: var(--text-dark);
+      font-weight: 700;
+    }
+    
+    .categories {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      margin: 2rem 0;
+      flex-wrap: wrap;
+    }
+    
+    .category-btn {
+      background: var(--white);
+      border: 1px solid var(--border);
+      color: var(--text-dark);
+      padding: 0.7rem 1.5rem;
+      border-radius: 30px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      box-shadow: var(--shadow-light);
+    }
+    
+    .category-btn.active, .category-btn:hover {
+      background: var(--primary);
+      color: var(--white);
+      border-color: var(--primary);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow);
+    }
+    
+    .products {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 2rem;
+      margin-bottom: 4rem;
+    }
+    
+    .product {
+      background: var(--white);
+      border-radius: var(--border-radius);
+      box-shadow: var(--shadow-light);
+      padding: 1.5rem;
+      text-align: center;
+      transition: var(--transition);
+      overflow: hidden;
+      border: 1px solid var(--border);
+      position: relative;
+    }
+    
+    .product:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-hover);
+    }
+    
+    .product img {
+      width: 100%;
+      height: 160px;
+      object-fit: cover;
+      border-radius: var(--border-radius-sm);
+      margin-bottom: 1rem;
+      transition: var(--transition);
+    }
+    
+    .product:hover img {
+      transform: scale(1.05);
+    }
+    
+    .product h3 {
+      font-size: 1.2rem;
+      color: var(--text-dark);
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+    }
+    
+    .product p {
+      font-size: 0.95rem;
+      color: var(--text-light);
+      margin-bottom: 1rem;
+      line-height: 1.5;
+    }
+    
+    .price {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 1rem;
+    }
+    
+    .product button {
+      background-color: var(--accent);
+      color: var(--white);
+      border: none;
+      padding: 0.7rem 1.5rem;
+      border-radius: var(--border-radius);
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: var(--transition);
+      width: 100%;
+      box-shadow: var(--shadow-light);
+    }
+    
+    .product button:hover {
+      background: var(--accent-dark);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow);
+    }
+    
+    /* Checkout improvements */
+    .checkout {
+      padding: 2.5rem;
+      display: none;
+      max-width: 700px;
+      margin: 2rem auto;
+      background: var(--white);
+      border-radius: var(--border-radius);
+      box-shadow: var(--shadow);
+      position: relative;
+    }
+    
+    .checkout::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 5px;
+      height: 100%;
+      background: var(--accent);
+      border-radius: var(--border-radius) 0 0 var(--border-radius);
+    }
+    
+    .checkout h2 {
+      color: var(--primary);
+      margin-bottom: 1.8rem;
+      font-weight: 700;
+      font-size: 1.8rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    
+    .checkout h2::before {
+      content: '🛒';
+    }
+    
+    .cart-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.2rem;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 1.2rem;
+    }
+    
+    .cart-item img {
+      width: 60px;
+      height: 60px;
+      object-fit: cover;
+      border-radius: var(--border-radius-sm);
+      margin-right: 1rem;
+    }
+    
+    .cart-item-details {
+      flex: 1;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .cart-item-name {
+      font-weight: 600;
+    }
+    
+    .cart-item-price {
+      color: var(--primary);
+      font-weight: 600;
+    }
+    
+    .summary {
+      border-top: 1px solid var(--border);
+      margin-top: 1.8rem;
+      padding-top: 1.8rem;
+    }
+    
+    .summary p {
+      display: flex;
+      justify-content: space-between;
+      margin: 0.7rem 0;
+      font-size: 1rem;
+    }
+    
+    .summary p:last-child {
+      font-size: 1.2rem;
+      border-top: 1px solid var(--border);
+      padding-top: 0.7rem;
+      margin-top: 1rem;
+    }
+    
+    .collection-notice {
+      margin: 1.5rem 0;
+      padding: 1.2rem;
+      background: #fff8e1;
+      border-radius: var(--border-radius);
+      border-left: 4px solid var(--primary);
+      color: var(--text-dark);
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+    }
+    
+    .collection-notice i {
+      color: var(--primary);
+      margin-right: 10px;
+      font-size: 1.1rem;
+    }
+    
+    #paypal-button-container {
+      margin-bottom: 1.5rem;
+    }
+    
+    #place-order {
+      width: 100%;
+      background: var(--accent);
+      color: var(--white);
+      padding: 1rem;
+      border: none;
+      border-radius: var(--border-radius);
+      font-size: 1.1rem;
+      margin-top: 1.5rem;
+      cursor: pointer;
+      font-weight: 600;
+      transition: var(--transition);
+      box-shadow: var(--shadow);
+    }
+    
+    #place-order:hover {
+      background: var(--accent-dark);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-hover);
+    }
+    
+    /* Footer improvements */
+    footer {
+      text-align: center;
+      padding: 3rem 1rem 2rem;
+      font-size: 0.9rem;
+      background: var(--text-dark);
+      margin-top: 5rem;
+      color: rgba(255, 255, 255, 0.7);
+    }
+    
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2.5rem;
+      text-align: left;
+    }
+    
+    .footer-section h3 {
+      color: var(--white);
+      margin-bottom: 1.2rem;
+      font-size: 1.2rem;
+      position: relative;
+      padding-bottom: 0.5rem;
+    }
+    
+    .footer-section h3::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 40px;
+      height: 2px;
+      background: var(--primary);
+    }
+    
+    .footer-section p, .footer-section a {
+      color: rgba(255, 255, 255, 0.7);
+      margin-bottom: 0.7rem;
+      display: block;
+      text-decoration: none;
+      transition: var(--transition);
+    }
+    
+    .footer-section a:hover {
+      color: var(--white);
+      padding-left: 5px;
+    }
+    
+    .footer-section i {
+      margin-right: 8px;
+      width: 16px;
+      text-align: center;
+    }
+    
+    .copyright {
+      margin-top: 3rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      text-align: center;
+      width: 100%;
+      color: rgba(255, 255, 255, 0.5);
+    }
+    
+    /* Responsive styles for mobile */
+    @media (max-width: 768px) {
+      .top-bar {
+        padding: 0.5rem 1rem;
+        font-size: 0.8rem;
+      }
+      
+      .main-header {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 1rem;
+      }
+      
+      .logo {
+        margin-bottom: 1rem;
+      }
+      
+      nav {
+        gap: 1rem;
+        width: 100%;
+        justify-content: flex-start;
+        flex-wrap: wrap;
+      }
+      
+      .hero {
+        padding: 4rem 1rem;
+      }
+      
+      .hero h2 {
+        font-size: 2.2rem;
+      }
+      
+      .hero p {
+        font-size: 1rem;
+      }
+      
+      .products-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+      }
+      
+      .categories {
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        margin: 2rem 0;
+      }
+      
+      .popular, .seasonal {
+        padding: 1.5rem;
+      }
+      
+      .popular-items, .seasonal-items {
+        gap: 1rem;
+      }
+      
+      .popular-item, .seasonal-item {
+        width: 140px;
+        padding: 1rem;
+      }
+      
+      .products {
+        grid-template-columns: 1fr;
+        padding: 1rem;
+        gap: 1.5rem;
+      }
+      
+      .checkout {
+        padding: 1.5rem;
+        margin: 1rem auto;
+      }
+      
+      .footer-content {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+      
+      .footer-section h3::after {
+        left: 50%;
+        transform: translateX(-50%);
+      }
+    }
+    
+    /* Animation for page elements */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .product, .popular-item, .seasonal-item, .category-btn {
+      animation: fadeIn 0.5s ease forwards;
+    }
+    
+    /* Loading state for buttons */
+    .loading {
+      position: relative;
+      pointer-events: none;
+    }
+    
+    .loading::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 20px;
+      height: 20px;
+      margin: -10px 0 0 -10px;
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      border-radius: 50%;
+      border-top-color: white;
+      animation: spin 0.8s linear infinite;
+    }
+    
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="top-bar">
+      <div>
+        <a href="#"><i class="fas fa-phone"></i> +44 20 7231 7151</a> | 
+        <a href="#"><i class="fas fa-envelope"></i> info@cafeamisha.com</a>
+      </div>
+    </div>
+    <div class="main-header">
+      <div class="logo">
+        <img src="https://th.bing.com/th/id/R.ba06966f143148b38d522236559678e9?rik=dV0BK2CcMStoVw&riu=http%3a%2f%2fwww.cafeamisha.co.uk%2fimg%2flogo-white.png&ehk=r8UsJTswgx9wplnnCnRVyVNY6kuZFqWilITSCBofBCo%3d&risl=&pid=ImgRaw&r=0" alt="Cafe Amisha Logo">
+        <h1>Cafe Amisha</h1>
+      </div>
+      <nav>
+        <ul>
+          <li><a href="index.html" id="nav-home">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="menu.html">Menu</a></li>
+          <li><a href="book_venue.html">Venues</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="book.html" class="book-btn">Reserve</a></li>
+          <li><a href="order_page.html" class="active"><i class="fas fa-shopping-cart"></i> Orders</a></li>
+          <li>
+            <button id="cart-btn">
+              🛒 Cart (<span id="cart-count">0</span>)
+            </button>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="hero-content">
+      <h2>Authentic Italian Groceries</h2>
+      <p>Fresh ingredients and imported specialties from Italy, delivered to your door</p>
+      <button class="cta-btn">Shop Now</button>
+    </div>
+  </section>
+
+  <h2 class="section-title">Most Popular</h2>
+  <section class="popular" id="popular-section">
+    <h3>Customer Favorites</h3>
+    <div class="popular-items">
+      <div class="popular-item">
+        <img src="https://images.unsplash.com/photo-1598866594230-a7c12756260f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1006&q=80" alt="San Marzano Tomatoes">
+        <div>San Marzano Tomatoes</div>
+      </div>
+      <div class="popular-item">
+        <img src="https://images.unsplash.com/photo-1567234669003-dce7a7a88821?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Parmigiano Reggiano">
+        <div>Parmigiano Reggiano</div>
+      </div>
+      <div class="popular-item">
+        <img src="https://images.unsplash.com/photo-1551462147-37885a0d1d12?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1169&q=80" alt="Spaghetti">
+        <div>De Cecco Spaghetti</div>
+      </div>
+      <div class="popular-item">
+        <img src="https://images.unsplash.com/photo-1551892374-ecf8754cf8b0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1064&q=80" alt="Extra Virgin Olive Oil">
+        <div>Extra Virgin Olive Oil</div>
+      </div>
+    </div>
+  </section>
+
+  <h2 class="section-title">Seasonal Specials</h2>
+  <section class="seasonal" id="seasonal-section">
+    <h3>Limited Time Offers</h3>
+    <div class="seasonal-items">
+      <div class="seasonal-item">
+        <img src="https://images.unsplash.com/photo-1570194065650-2f276eef1d6f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80" alt="Truffle Products">
+        <div>Truffle Products</div>
+      </div>
+      <div class="seasonal-item">
+        <img src="https://images.unsplash.com/photo-1551818255-e6e109cbc5cd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80" alt="Artisanal Cheeses">
+        <div>Artisanal Cheeses</div>
+      </div>
+      <div class="seasonal-item">
+        <img src="https://images.unsplash.com/photo-1598373182131-416facbdeef3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Holiday Panettone">
+        <div>Holiday Panettone</div>
+      </div>
+      <div class="seasonal-item">
+        <img src="https://images.unsplash.com/photo-1589302168068-964664d93dc0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80" alt="Seasonal Wines">
+        <div>Seasonal Wines</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="products-container">
+    <div class="products-header">
+      <h2>Our Products</h2>
+    </div>
+    
+    <div class="categories" id="category-tabs">
+      <button class="category-btn active" data-category="all"><i class="fas fa-th-large"></i> All</button>
+      <button class="category-btn" data-category="pasta"><i class="fas fa-utensils"></i> Pasta & Grains</button>
+      <button class="category-btn" data-category="sauces"><i class="fas fa-wine-bottle"></i> Sauces & Oils</button>
+      <button class="category-btn" data-category="cheese"><i class="fas fa-cheese"></i> Cheese & Dairy</button>
+      <button class="category-btn" data-category="meat"><i class="fas fa-drumstick-bite"></i> Meats & Salumi</button>
+      <button class="category-btn" data-category="bakery"><i class="fas fa-bread-slice"></i> Bakery</button>
+      <button class="category-btn" data-category="beverages"><i class="fas fa-wine-glass-alt"></i> Beverages</button>
+    </div>
+
+    <section class="products" id="product-list">
+      <div class="product" data-category="pasta">
+        <img src="https://images.unsplash.com/photo-1551462147-37885a0d1d12?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1169&q=80" alt="Spaghetti">
+        <h3>De Cecco Spaghetti</h3>
+        <p>Premium Italian pasta</p>
+        <div class="price">£2.49</div>
+        <button onclick="addToCart('De Cecco Spaghetti', 2.49, this)">Add to cart</button>
+      </div>
+      <div class="product" data-category="pasta">
+        <img src="https://images.unsplash.com/photo-1621996346565-e3dbc353d2e5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Penne Rigate">
+        <h3>Penne Rigate</h3>
+        <p>Classic ridged penne pasta</p>
+        <div class="price">£1.99</div>
+        <button onclick="addToCart('Penne Rigate', 1.99, this)">Add to cart</button>
+      </div>
+      <div class="product" data-category="sauces">
+        <img src="https://images.unsplash.com/photo-1592417817098-8fd3d9eb14a5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Tomato Sauce">
+        <h3>Mutti Tomato Sauce</h3>
+        <p>Italian crushed tomatoes</p>
+        <div class="price">£2.29</div>
+        <button onclick="addToCart('Mutti Tomato Sauce', 2.29, this)">Add to cart</button>
+      </div>
+      <div class="product" data-category="sauces">
+        <img src="https://images.unsplash.com/photo-1611854778585-e5e57d5d92e0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80" alt="Olive Oil">
+        <h3>Extra Virgin Olive Oil</h3>
+        <p>First cold press, 500ml</p>
+        <div class="price">£10.99</div>
+        <button onclick="addToCart('Extra Virgin Olive Oil', 10.99, this)">Add to cart</button>
+      </div>
+      <div class="product" data-category="cheese">
+        <img src="https://images.unsplash.com/photo-1551818255-e6e109cbc5cd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80" alt="Parmesan">
+        <h3>Parmigiano Reggiano</h3>
+        <p>Aged 24 months, 200g</p>
+        <div class="price">£8.99</div>
+        <button onclick="addToCart('Parmigiano Reggiano', 8.99, this)">Add to cart</button>
+      </div>
+      <div class="product" data-category="cheese">
+        <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ca4b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1081&q=80" alt="Mozzarella">
+        <h3>Fresh Mozzarella</h3>
+        <p>Buffalo mozzarella, 125g</p>
+        <div class="price">£3.49</div>
+        <button onclick="addToCart('Fresh Mozzarella', 3.49, this)">Add to cart</button>
+      </div>
+      <div class="product" data-category="meat">
+        <img src="https://images.unsplash.com/photo-1612878011193-43b9b2c9bc5c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1171&q=80" alt="Prosciutto">
+        <h3>Prosciutto di Parma</h3>
+        <p>Aged ham, sliced, 100g</p>
+        <div class="price">£6.99</div>
+        <button onclick="addToCart('Prosciutto di Parma', 6.99, this)">Add to cart</button>
+      </div>
+      <div class="product" data-category="meat">
+        <img src="https://images.unsplash.com/photo-1604503468506-a8da13d82791?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Salami">
+        <h3>Italian Salami</h3>
+        <p>Mixed salami selection</p>
+        <div class="price">£5.49</div>
+        <button onclick="addToCart('Italian Salami', 5.49, this)">Add to cart</button>
+      </div>
+      <div class="product" data-category="bakery">
+        <img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1172&q=80" alt="Ciabatta">
+        <h3>Fresh Ciabatta</h3>
+        <p>Artisan Italian bread</p>
+        <div class="price">£2.99</div>
+        <button onclick="addToCart('Fresh Ciabatta', 2.99, this)">Add to cart</button>
+      </div>
+      <div class="product" data-category="bakery">
+        <img src="https://images.unsplash.com/photo-1598373182131-416facbdeef3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Biscotti">
+        <h3>Italian Biscotti</h3>
+        <p>Almond cookies, 200g</p>
+        <div class="price">£3.99</div>
+        <button onclick="addToCart('Italian Biscotti', 3.99, this)">Add to cart</button>
+      </div>
+      <div class="product" data-category="beverages">
+        <img src="https://images.unsplash.com/photo-1506377247377-2a5b3b417ebb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Coffee">
+        <h3>Lavazza Coffee</h3>
+        <p>Premium ground coffee</p>
+        <div class="price">£4.99</div>
+        <button onclick="addToCart('Lavazza Coffee', 4.99, this)">Add to cart</button>
+      </div>
+      <div class="product" data-category="beverages">
+        <img src="https://images.unsplash.com/photo-1589302168068-964664d93dc0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80" alt="Wine">
+        <h3>Montepulciano d'Abruzzo</h3>
+        <p>Red wine, 750ml</p>
+        <div class="price">£12.99</div>
+        <button onclick="addToCart('Montepulciano Wine', 12.99, this)">Add to cart</button>
+      </div>
+    </section>
+  </div>
+
+  <section class="checkout" id="checkout">
+    <h2>Your Order</h2>
+    <div id="cart-items"></div>
+    <div class="summary">
+      <p><span>Subtotal:</span><span id="subtotal">£0.00</span></p>
+      <p><span>Tax (10%):</span><span id="tax">£0.00</span></p>
+      <p><strong>Total:</strong><strong id="total">£0.00</strong></p>
+    </div>
+    <div class="collection-notice">
+      <i class="fas fa-store"></i>
+      <span>Only option: <strong>Click & Collect</strong> from Cafe Amisha, 161 Grange Road, London.</span>
+    </div>
+    <!-- PayPal Button Embed -->
+    <div id="paypal-button-container" style="margin-bottom: 1.5rem;"></div>
+    <button id="place-order">Place Order</button>
+  </section>
+
+  <footer>
+    <div class="footer-content">
+      <div class="footer-section">
+        <h3>Amisha Italian Market</h3>
+        <p>Your premier destination for authentic Italian groceries. We import directly from Italy to bring you the finest ingredients.</p>
+      </div>
+      <div class="footer-section">
+        <h3>Contact Info</h3>
+        <p><i class="fas fa-map-marker-alt"></i> SE1 3GH, Grange Road, London</p>
+        <p><i class="fas fa-phone"></i> +44 20 7231 7151</p>
+        <p><i class="fas fa-envelope"></i> info@cafeamisha.com</p>
+      </div>
+      <div class="footer-section">
+        <h3>Opening Hours</h3>
+        <p><i class="far fa-clock"></i> Monday: Closed</p>
+        <p><i class="far fa-clock"></i> Tuesday - Saturday: 12:00pm - 10:30pm</p>
+        <p><i class="far fa-clock"></i> Sunday: 12:00pm - 9:00pm</p>
+        <a href="book.html" class="book-btn" style="margin-top: 1rem; display: inline-block;">Make Reservation</a>
+      </div>
+    </div>
+    <div class="copyright">
+      <p>&copy; 2025 Cafe Amisha. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    let cart = [];
+
+    function addToCart(name, price, btn) {
+      cart.push({ name, price });
+      document.getElementById('cart-count').textContent = cart.length;
+      btn.textContent = 'Added!';
+      btn.classList.add('loading');
+      setTimeout(() => {
+        btn.textContent = 'Add to cart';
+        btn.classList.remove('loading');
+      }, 1000);
+    }
+
+    document.getElementById('cart-btn').addEventListener('click', () => {
+      document.querySelector('.products-container').style.display = 'none';
+      document.getElementById('checkout').style.display = 'block';
+      document.getElementById('popular-section').style.display = 'none';
+      document.getElementById('seasonal-section').style.display = 'none';
+      document.querySelectorAll('.section-title').forEach(title => {
+        title.style.display = 'none';
+      });
+      displayCart();
+      renderPayPalButton();
+    });
+
+    function displayCart() {
+      const container = document.getElementById('cart-items');
+      container.innerHTML = '';
+      let subtotal = 0;
+      cart.forEach(item => {
+        subtotal += item.price;
+        const div = document.createElement('div');
+        div.classList.add('cart-item');
+        div.innerHTML = `
+          <div class="cart-item-details">
+            <span class="cart-item-name">${item.name}</span>
+            <span class="cart-item-price">£${item.price.toFixed(2)}</span>
+          </div>
+        `;
+        container.appendChild(div);
+      });
+      const tax = subtotal * 0.10;
+      const total = subtotal + tax;
+      document.getElementById('subtotal').textContent = '£' + subtotal.toFixed(2);
+      document.getElementById('tax').textContent = '£' + tax.toFixed(2);
+      document.getElementById('total').textContent = '£' + total.toFixed(2);
+    }
+
+    document.getElementById('place-order').addEventListener('click', () => {
+      alert('Grazie! Your Italian groceries will be available for pick up soon 🛒');
+      cart = [];
+      document.getElementById('cart-count').textContent = '0';
+      document.getElementById('checkout').style.display = 'none';
+      document.querySelector('.products-container').style.display = 'block';
+      document.getElementById('popular-section').style.display = 'block';
+      document.getElementById('seasonal-section').style.display = 'block';
+      document.querySelectorAll('.section-title').forEach(title => {
+        title.style.display = 'block';
+      });
+    });
+
+    // PayPal Button Integration
+    function renderPayPalButton() {
+      if (document.getElementById('paypal-button-container').children.length === 0) {
+        paypal.Buttons({
+          createOrder: function(data, actions) {
+            const total = parseFloat(document.getElementById('total').textContent.replace('£',''));
+            return actions.order.create({
+              purchase_units: [{
+                amount: {
+                  value: total.toFixed(2)
+                }
+              }]
+            });
+          },
+          onApprove: function(data, actions) {
+            return actions.order.capture().then(function(details) {
+              alert('Grazie! Payment completed by ' + details.payer.name.given_name);
+              cart = [];
+              document.getElementById('cart-count').textContent = '0';
+              document.getElementById('checkout').style.display = 'none';
+              document.querySelector('.products-container').style.display = 'block';
+              document.getElementById('popular-section').style.display = 'block';
+              document.getElementById('seasonal-section').style.display = 'block';
+              document.querySelectorAll('.section-title').forEach(title => {
+                title.style.display = 'block';
+              });
+            });
+          }
+        }).render('#paypal-button-container');
+      }
+    }
+
+    // Category filtering
+    document.querySelectorAll('.category-btn').forEach(btn => {
+      btn.addEventListener('click', function() {
+        document.querySelectorAll('.category-btn').forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
+        const category = this.getAttribute('data-category');
+        document.querySelectorAll('.product').forEach(prod => {
+          if (category === 'all' || prod.getAttribute('data-category') === category) {
+            prod.style.display = 'block';
+          } else {
+            prod.style.display = 'none';
+          }
+        });
+      });
+    });
+
+    // Navbar navigation (simple show/hide)
+    document.getElementById('nav-home').addEventListener('click', function(e) {
+      e.preventDefault();
+      document.querySelector('.products-container').style.display = 'block';
+      document.getElementById('checkout').style.display = 'none';
+      document.getElementById('popular-section').style.display = 'block';
+      document.getElementById('seasonal-section').style.display = 'block';
+      document.querySelectorAll('.section-title').forEach(title => {
+        title.style.display = 'block';
+      });
+      
+      // Update active nav link
+      document.querySelectorAll('nav a').forEach(link => {
+        link.classList.remove('active');
+      });
+      this.classList.add('active');
+    });
+  </script>
+
+  <!-- Add PayPal SDK before your closing </body> tag -->
+  <script src="https://www.paypal.com/sdk/js?client-id=sb&currency=GBP"></script>
+</body>
+</html>

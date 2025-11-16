@@ -1,0 +1,1494 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Menu | Cafe Amisha</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Playfair+Display:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mixitup/3.3.1/mixitup.min.css">
+    <style>
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f9f5f2;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: #1a1a1a;
+            color: white;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+        }
+        
+        .logo-img {
+            height: 50px;
+            margin-right: 10px;
+        }
+        
+        .logo h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+        }
+        
+        nav ul {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            flex-wrap: wrap;
+        }
+        
+        nav li {
+            margin: 0 10px;
+        }
+        
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 8px 15px;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+            font-weight: 500;
+        }
+        
+        nav a:hover, nav a.active {
+            background-color: #c41e3a;
+        }
+        
+        .book-btn {
+            background-color: #c41e3a;
+            border-radius: 30px;
+        }
+        
+        /* Hero video section */
+        .menu-hero {
+            position: relative;
+            height: 100vh;
+            min-height: 500px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            background: #000;
+        }
+
+        .menu-hero-video {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            z-index: 0;
+        }
+
+        .menu-hero-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(0,0,0,0.25), rgba(0,0,0,0.55));
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .menu-hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            color: #fff;
+            max-width: 800px;
+            padding: 2rem;
+        }
+
+        .menu-hero-content h1 {
+            font-family: "Playfair Display", serif;
+            font-size: 3.6rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            text-shadow: 0 8px 30px rgba(0,0,0,0.5);
+            line-height: 1.1;
+        }
+
+        .menu-hero-content p {
+            font-size: 1.15rem;
+            color: rgba(255,255,255,0.95);
+            margin-bottom: 1.5rem;
+            text-shadow: 0 4px 12px rgba(0,0,0,0.4);
+        }
+
+        .menu-hero-cta {
+            display: inline-flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .menu-hero-btn {
+            padding: 0.9rem 2rem;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 1rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            border: none;
+            cursor: pointer;
+        }
+
+        .menu-hero-btn.primary {
+            background: linear-gradient(135deg, #c41e3a, #9c172e);
+            color: #fff;
+            box-shadow: 0 6px 24px rgba(196,30,58,0.3);
+        }
+
+        .menu-hero-btn.primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 32px rgba(196,30,58,0.4);
+        }
+
+        .menu-hero-btn.secondary {
+            background: rgba(255,255,255,0.1);
+            color: #fff;
+            border: 1px solid rgba(255,255,255,0.2);
+            backdrop-filter: blur(6px);
+        }
+
+        .menu-hero-btn.secondary:hover {
+            background: rgba(255,255,255,0.15);
+            transform: translateY(-3px);
+        }
+
+        /* Featured Dishes Section */
+        .featured-dishes {
+            padding: 4rem 0;
+            background-color: #f9f5f2;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            font-family: "Playfair Display", serif;
+            font-size: 2.5rem;
+            color: #333;
+        }
+
+        .dishes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .dish-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .dish-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .dish-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .dish-info {
+            padding: 1.5rem;
+        }
+
+        .dish-name {
+            font-family: "Playfair Display", serif;
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: #333;
+        }
+
+        .dish-description {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .dish-price {
+            font-weight: 600;
+            color: #c41e3a;
+            font-size: 1.1rem;
+        }
+
+        /* Menu Tabs */
+        .menu-tabs {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .menu-tab-btn {
+            padding: 0.8rem 1.5rem;
+            border: none;
+            background: #f0f0f0;
+            border-radius: 30px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .menu-tab-btn.active {
+            background: #c41e3a;
+            color: white;
+        }
+
+        .menu-tab-btn:hover:not(.active) {
+            background: #e0e0e0;
+        }
+
+        /* Full Menu Styles */
+        .full-menu {
+            padding: 4rem 0;
+            background-color: white;
+        }
+        
+        .gallery-trigger {
+            margin-bottom: 2rem;
+        }
+        
+        .gallery-trigger ul {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        
+        .gallery-trigger a {
+            padding: 0.5rem 1.5rem;
+            background: #f0f0f0;
+            border-radius: 30px;
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .gallery-trigger a:hover, .gallery-trigger a.active {
+            background: #c41e3a;
+            color: white;
+        }
+        
+        .menu-category {
+            margin-bottom: 3rem;
+        }
+        
+        .menu-category h4 {
+            text-align: center;
+            font-family: "Playfair Display", serif;
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: #333;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #c41e3a;
+            display: inline-block;
+        }
+        
+        .menu-restaurant {
+            margin-bottom: 1.5rem;
+            padding: 1rem;
+            border-bottom: 1px dashed #e0e0e0;
+        }
+        
+        .menu-title {
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: #333;
+            margin-bottom: 0.3rem;
+        }
+        
+        .menu-subtitle {
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        .menu-line {
+            display: block;
+            height: 1px;
+            background: #e0e0e0;
+            margin: 0.5rem 0;
+        }
+        
+        .clearfix {
+            clear: both;
+        }
+        
+        /* Footer Styles */
+        footer {
+            background-color: #1a1a1a;
+            color: white;
+            padding: 3rem 0 1rem;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        .footer-section h3 {
+            font-family: "Playfair Display", serif;
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+        
+        .footer-section p, .footer-section a {
+            color: #ccc;
+            margin-bottom: 0.5rem;
+            display: block;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-section a:hover {
+            color: white;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            transition: all 0.3s;
+        }
+        
+        .social-links a:hover {
+            background: #c41e3a;
+            transform: translateY(-3px);
+        }
+        
+        .copyright {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 1rem;
+            border-top: 1px solid #333;
+            color: #999;
+            font-size: 0.9rem;
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .menu-hero { 
+                height: 70vh; 
+                min-height: 420px; 
+            }
+            
+            .menu-hero-content h1 { 
+                font-size: 2.2rem; 
+            }
+            
+            .menu-hero-content p { 
+                font-size: 1rem; 
+            }
+            
+            .menu-hero-cta { 
+                flex-direction: column; 
+                align-items: center; 
+            }
+            
+            .section-title { 
+                font-size: 2rem; 
+            }
+            
+            .dishes-grid { 
+                grid-template-columns: 1fr; 
+            }
+            
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            nav li {
+                margin: 5px 0;
+            }
+            
+            .gallery-trigger ul {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="https://th.bing.com/th/id/R.ba06966f143148b38d522236559678e9?rik=dV0BK2CcMStoVw&riu=http%3a%2f%2fwww.cafeamisha.co.uk%2fimg%2flogo-white.png&ehk=r8UsJTswgx9wplnnCnRVyVNY6kuZFqWilITSCBofBCo%3d&risl=&pid=ImgRaw&r=0" alt="Cafe Amisha Logo" class="logo-img">
+            <h1>Cafe Amisha</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="menu.html" class="active">Menu</a></li>
+                <li><a href="gallery.html">Gallery</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="book.html" class="book-btn">Reserve</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Menu Hero Section with Video -->
+    <section class="menu-hero" aria-label="Menu showcase video">
+        <video class="menu-hero-video" autoplay muted loop playsinline preload="auto">
+            <source src="prep_dish.mp4" type="video/mp4">
+            <!-- fallback text -->
+        </video>
+
+        <div class="menu-hero-overlay" aria-hidden="true"></div>
+
+        <div class="menu-hero-content">
+            <h1>Discover Our Menu</h1>
+            <p>Experience authentic Italian flavors crafted with passion and the finest ingredients</p>
+            <div class="menu-hero-cta">
+                <a href="#featured-dishes" class="menu-hero-btn primary">View Featured Dishes</a>
+                <a href="#full-menu" class="menu-hero-btn secondary">Browse Full Menu</a>
+            </div>
+        </div>
+    </section>
+
+    <main>
+        <!-- Featured Dishes Section -->
+        <section id="featured-dishes" class="featured-dishes">
+            <h2 class="section-title">Featured Dishes</h2>
+            <div class="dishes-grid">
+                <div class="dish-card">
+                    <img src="eggplant.jpg" class="dish-image">
+                    <div class="dish-info">
+                        <h3 class="dish-name">Parmigiana</h3>
+                        <p class="dish-description">Layers of golden eggplant, rich tomato, and molten mozzarella elegance.</p>
+                    </div>
+                </div>
+                <div class="dish-card">
+                    <img src="lamb_chop.jpg" class="dish-image">
+                    <div class="dish-info">
+                        <h3 class="dish-name">Agnello alla Scottadito</h3>
+                        <p class="dish-description">Charred, tender lamb chops garnished with rosemary, lemon, and elegance.</p>
+                    </div>
+                </div>
+                <div class="dish-card">
+                    <img src="rissoto.jpg" class="dish-image">
+                    <div class="dish-info">
+                        <h3 class="dish-name">Risotto</h3>
+                        <p class="dish-description">Creamy arborio rice, infused with broth, Parmesan, elegance in every bite.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Full Menu Section -->
+        <section id="full-menu" class="full-menu">
+            <div class="container">
+                <h2 class="section-title">Our Full Menu</h2>
+                
+                <!-- Section: menu 
+    <section id="menu" class="section-padding">
+    <section id="menu" class="home-section text-center bg-gray">-->
+
+    <section id="menu" class="home-section text-center">
+    	<div class="heading-menu">
+			<div class="container">
+			<div class="row">
+				<div class="col-lg-8 col-lg-offset-2">
+					<div class="wow bounceInDown" data-wow-delay="0.4s">
+					<div class="section-heading">
+					<h2>Menu</h2>
+					<i class="fa fa-2x fa-angle-down"></i>
+
+					</div>
+					</div>
+				</div>
+			</div>
+			</div>
+		</div>
+		<div class="container">
+            <div class="row">
+                <div class="col-lg-2 col-lg-offset-5">
+                    <hr class="marginbot-50">
+                </div>
+            </div>
+            <div class="row">
+                <!--<div class="col-md-12 text-center marb-35">
+                    <h1 class="header-h">Our Menu</h1>
+                </div>-->
+                <div class="col-md-12  text-center gallery-trigger">
+                    <ul>
+                        <li><a class="filter" data-filter="all">Show All</a></li>
+                        <li><a class="filter" data-filter=".category-1">MAIN</a></li>
+                        <li><a class="filter" data-filter=".category-2">DRINKS</a></li>
+                        <li><a class="filter" data-filter=".category-3">DOLCE</a></li>
+                    </ul>
+                      
+                </div>
+                <div id="Container">
+                <span class="clearfix"></span>
+				<div class="col-md-12 mix category-1 text-center">
+				<h4>STUZZICHINI</h4>
+                 </div>
+                 <span class="clearfix"></span>
+                    <div class="mix category-1 menu-restaurant" data-myorder="2">
+                        <span class="clearfix">
+                        <div class="menu-title">Marinated Mixed Olives  (V)</div>
+                        <span style="left: 1px; right: 1px;" class="menu-line"></span>
+                      </span>
+                      <span class="menu-subtitle">Green olives marinated with herbs</span>
+                    </div>
+                    <div class="mix category-1 menu-restaurant" data-myorder="2">
+                        <span class="clearfix">
+                       <div class="menu-title">Aglio (V) </div>
+                        <span style="left: 1px; right: 1px;" class="menu-line"></span>
+                      </span>
+                      <span class="menu-subtitle">Garlic and basil pizza bread</span>
+                    </div>
+                    <div class="mix category-1 menu-restaurant" data-myorder="2">
+                        <span class="clearfix">
+                       <div class="menu-title">Aglio & Mozzarella (V)</div>
+                        <span style="left: 1px; right: 1px;" class="menu-line"></span>
+                      </span>
+                      <span class="menu-subtitle">Garlic, basil and mozzarella cheese pizza bread</span>
+                    </div>
+                    <div class="mix category-1 menu-restaurant" data-myorder="2">
+                        <span class="clearfix">
+                        <div class="menu-title">Cestino di Pane  (V) </div>
+                        <span style="left: 1px; right: 1px;" class="menu-line"></span>
+                      </span>
+                      <span class="menu-subtitle"> Home made bread selection served with extra virgin olive oil and balsamic vinegar</span>
+                    </div>
+                    <div class="mix category-1 menu-restaurant" data-myorder="2">
+                        <span class="clearfix">
+                        <div class="menu-title">Bruschette  (V) </div>
+                        <span style="left: 1px; right: 1px;" class="menu-line"></span>
+                      </span>
+                      <span class="menu-subtitle">Tomato italian bruschetta tossed with garlic and basil served with Parmesan cheese</span>
+                    </div>
+                    <span class="clearfix"></span>
+                 <div class="col-md-12  mix category-1 text-center">
+					<h4>ANTIPASTI</h4>
+                 </div><span class="clearfix"></span>
+
+                    <div class="mix category-1 menu-restaurant" data-myorder="2">
+                        <span class="clearfix">
+                        <div class="menu-title">Zuppa del giorno</div>
+                        <span style="left: 1px; right: 1px;" class="menu-line"></span>
+                      </span>
+                      <span class="menu-subtitle">Soup of the day served with bread</span>
+                    </div>
+                    <div class="mix category-1 menu-restaurant" data-myorder="2">
+                        <span class="clearfix">
+                        <div class="menu-title">Guazzetto di Cozze*</div>
+                        <span style="left: 1px; right: 1px;" class="menu-line"></span>
+                      </span>
+                      <span class="menu-subtitle">Mussels in tomato sauce, fresh chillies and garlic</span>
+                    </div>
+                    <div class="mix category-1 menu-restaurant" data-myorder="2">
+                        <span class="clearfix">
+                        <div class="menu-title">Calamari al Forno</div>
+                        <span style="left: 1px; right: 1px;" class="menu-line"></span>
+                      </span>
+                      <span class="menu-subtitle">Baked squid with bread crumbs and herbs served with Mayonnaises	</span>
+                    </div>
+                    
+                  
+                    <div class="mix category-1 menu-restaurant" data-myorder="2">
+                        <span class="clearfix">
+                       <div class="menu-title">Gamberoni All'Aglio</div>
+                        <span style="left: 1px; right: 1px;" class="menu-line"></span>
+                      </span>
+                      <span class="menu-subtitle">King prawns in a garlic oil, white wine and lemon</span>
+                    </div>
+                    <div class="mix category-1 menu-restaurant" data-myorder="2">
+                        <span class="clearfix">
+                        <div class="menu-title">Antipasto Misto</div>
+                        <span style="left: 1px; right: 1px;" class="menu-line"></span>
+
+                      </span>
+
+                      <span class="menu-subtitle">Platter of Parma ham, cooked ham, salami, buffalo mozzarella</span>
+                    </div> 
+                    <div class="mix category-1 menu-restaurant" data-myorder="2">
+                        <span class="clearfix">
+                        <div class="menu-title">Antipasto di Verdure  (V) </div>
+                        <span style="left: 1px; right: 1px;" class="menu-line"></span>
+                      </span>
+                      <span class="menu-subtitle">Mix grilled vegetables with buffalo mozzarella</span>
+                    </div> 
+                    <div class="mix category-1 menu-restaurant" data-myorder="2">
+                        <span class="clearfix">
+                         <div class="menu-title">Caprino con Spinacci & Peperoni(V) </div>
+                        <span style="left: 1px; right: 1px;" class="menu-line"></span>
+                      </span>
+                      <span class="menu-subtitle">Warm goat cheese served with spinach, roasted peppers, walnuts, cherry tomatoes and balsamic dressing</span>
+                    </div> 
+                    <div class="mix category-1 menu-restaurant" data-myorder="2">
+                        <span class="clearfix">
+                         <div class="menu-title">Parmigiana (V) </div>
+                        <span style="left: 1px; right: 1px;" class="menu-line"></span>
+
+                      </span>
+                      <span class="menu-subtitle">Baked aubergines layered with mozzarella, parmesan cheese and tomato sauce</span>
+                    </div>                
+                    <span class="clearfix"></span>
+                    <div class="col-md-12 mix category-1 text-center">
+                        <h4>PASTA</h4>
+                 	</div><span class="clearfix"></span>
+
+                    <div class="mix category-1 menu-restaurant" data-myorder="2">
+                        <span class="clearfix">
+                        <div class="menu-title">Tagliatelle ai Funghi  (V)</div>
+                        <span style="left: 1px; right: 1px;" class="menu-line"></span>
+                      </span>
+                      <span class="menu-subtitle">Home made pasta served with mix mushroom</span>
+                    </div> 
+                    <div class="mix category-1 menu-restaurant" data-myorder="2">
+                        <span class="clearfix">
+                         <div class="menu-title">Orecchiette alla Sorrentina (V)</div>
+                        <span style="left: 1px; right: 1px;" class="menu-line"></span>
+                      </span>
+                      <span class="menu-subtitle">Orecchiette pasta served with fresh tomato sauce and baffalo mozzarella </span>
+                    </div>
+                    <div class="mix category-1 menu-restaurant" data-myorder="2">
+                        <span class="clearfix">
+                         <div class="menu-title">Lasagna di Manzo</div>
+                        <span style="left: 1px; right: 1px;" class="menu-line"></span>
+                      </span>
+                    </div> 
+                    <div class="mix category-1 menu-restaurant" data-myorder="2">
+                        <span class="clearfix">
+                         <div class="menu-title">Spaghetti Carbonara</div>
+                        <span style="left: 1px; right: 1px;" class="menu-line"></span>
+                      </span>
+                      <span class="menu-subtitle">Spaghetti pasta served with egg and smoked italian pancetta</span>
+                    </div> 
+                    <div class="mix category-1 menu-restaurant" data-myorder="2">
+                        <span class="clearfix">
+                         <div class="menu-title">Ravioli ai Porcini</div>
+                        <span style="left: 1px; right: 1px;" class="menu-line"></span>
+                      </span>
+                      <span class="menu-subtitle">Ravioli filled with porcini mushroom, served with speck, cream and walnuts</span>
+                    </div> 
+                    <div class="mix category-1 menu-restaurant" data-myorder="2">
+                        <span class="clearfix">
+                         <div class="menu-title">Tagliolini  Gamberoni e Asparagi </div>
+                        <span style="left: 1px; right: 1px;" class="menu-line"></span>
+                      </span>
+                      <span class="menu-subtitle">Home made black ink pasta served with king prawns, asparagus, fresh tomato, and chilly</span>
+                    </div>             <div class="mix category-1 menu-restaurant" data-myorder="2">
+                        <span class="clearfix">
+                        <div class="menu-title">Tagliatelle alla Bolognese </div>
+                        <span style="left: 1px; right: 1px;" class="menu-line"></span>
+                      </span>
+                      <span class="menu-subtitle">Home made pasta served with beef ragout</span>
+                    </div>
+                    <div class="mix category-1 menu-restaurant" data-myorder="2">
+                        <span class="clearfix">
+                         <div class="menu-title">Linguine allo  Scoglio* </div>
+                        <span style="left: 1px; right: 1px;" class="menu-line"></span>
+                      </span>
+                      <span class="menu-subtitle">Linguine pasta with mussels, black tiger prawns, squid served in tomato sauce</span>
+                    </div> 
+                    <div class="mix category-1 menu-restaurant" data-myorder="2">
+                        <span class="clearfix">
+                         <div class="menu-title">Spaghetti al Pesto  (V)</div>
+                        <span style="left: 1px; right: 1px;" class="menu-line"></span>
+                      </span>
+                      <span class="menu-subtitle">Spaghetti pasta with home made fresh basil pesto</span>
+                    </div> 
+                    <div class="mix category-1 menu-restaurant" data-myorder="2">
+                        <span class="clearfix">
+                         <div class="menu-title">Spaghetti all’Arrabiata (V)</div>
+                        <span style="left: 1px; right: 1px;" class="menu-line"></span>
+                      </span>
+                      <span class="menu-subtitle">Spaghetti pasta with fresh tomato sauce and
+fresh chillies
+</span>
+                    </div> 
+                    <div class="mix category-1 menu-restaurant" data-myorder="2">
+                        <span class="clearfix">
+                         <div class="menu-title">Penne alla Boscaiola</div>
+                        <span style="left: 1px; right: 1px;" class="menu-line"></span>
+                      </span>
+                      <span class="menu-subtitle">Penne shaped pasta served with Italian ham, mushroom, tomato and cream sauce</span>
+                    </div> 
+					<span class="clearfix"></span>
+                    <div class="col-md-12 mix category-1 text-center">
+                        <h4>INSALATE</h4>
+                 	</div><span class="clearfix"></span>
+
+                    <div class="mix category-1 menu-restaurant" data-myorder="2">
+                        <span class="clearfix">
+                         <div class="menu-title">Insalata di Spinaci</div>
+                        <span style="left: 1px; right: 1px;" class="menu-line"></span>
+                      </span>
+                      <span class="menu-subtitle">Baby spinach salad, avocado and crispy Italian pancetta, tossed in a mustard dressing finished with parmesan shavings</span>
+                    </div>                    
+                    <div class="mix category-1 menu-restaurant" data-myorder="2">
+                        <span class="clearfix">
+                         <div class="menu-title">Caprese (V)</div>
+                        <span style="left: 1px; right: 1px;" class="menu-line"></span>
+                      </span>
+                      <span class="menu-subtitle">Buffalo mozzarella, plum tomatoes and fresh basil finished with home made basil olive oil</span>
+                    </div>                  
+                    <span class="clearfix"></span>
+                    <div class="col-md-12  mix category-1 text-center">
+                        <h4>PIZZA</h4>
+                 	</div><span class="clearfix"></span>
+
+                    <div class="mix category-1 menu-restaurant" data-myorder="2">
+                        <span class="clearfix">
+                         <div class="menu-title">Margherita  (V)</div>
+                        <span style="left: 1px; right: 1px;" class="menu-line"></span>
+                      </span>
+                    </div>                    
+                    <div class="mix category-1 menu-restaurant" data-myorder="2">
+                        <span class="clearfix">
+                         <div class="menu-title">Tricolore   (V) </div>
+                        <span style="left: 1px; right: 1px;" class="menu-line"></span>
+                      </span>
+                      <span class="menu-subtitle">Tomato,Buffalo mozzarella, cherry tomatoes and fresh rocket leaves</span>
+                    </div>
+                    <div class="mix category-1 menu-restaurant" data-myorder="2">
+                        <span class="clearfix">
+                         <div class="menu-title">Fiorentina  (V)</div>
+                        <span style="left: 1px; right: 1px;" class="menu-line"></span>
+                      </span>
+                      <span class="menu-subtitle">Tomato, mozzarella, spinach, buffalo milk ricotta, eggs, and Parmesan cheese finished with garlic oil</span>
+                    </div>                    
+                    <div class="mix category-1 menu-restaurant" data-myorder="2">
+                        <span class="clearfix">
+                         <div class="menu-title">Ortolana (V) </div>
+                        <span style="left: 1px; right: 1px;" class="menu-line"></span>
+                      </span>
+                      <span class="menu-subtitle">Tomato, mozzarella, grilled aubergines, courgettes, mushroom, roasted peppers finished with rocket salad</span>
+                    </div>
+                    <div class="mix category-1 menu-restaurant" data-myorder="2">
+                        <span class="clearfix">
+                        <div class="menu-title">Prosciutto e Funghi </div>
+                        <span style="left: 1px; right: 1px;" class="menu-line"></span>
+                      </span>
+                      <span class="menu-subtitle">Tomato, mozzarella, cooked Italian ham, mushrooms and oregano</span>
+                    </div>                    
+                    <div class="mix category-1 menu-restaurant" data-myorder="2">
+                        <span class="clearfix">
+                        <div class="menu-title">Amisha Piccante </div>
+                        <span style="left: 1px; right: 1px;" class="menu-line"></span>
+                      </span>
+                      <span class="menu-subtitle">Tomato and mozzarella, southern Italian spicy salami, roasted red peppers and fresh green chillies</span>
+                    </div>                    
+                    <div class="mix category-1 menu-restaurant" data-myorder="2">
+                        <span class="clearfix">
+                        <div class="menu-title">Trentina</div>
+                        <span style="left: 1px; right: 1px;" class="menu-line"></span>
+                      </span>
+                      <span class="menu-subtitle">Tomato, mozzarella, gorgonzola cheese (Italian blue cheese) and speck</span>
+                    </div>                    
+                    <div class="mix category-1 menu-restaurant" data-myorder="2">
+                        <span class="clearfix">
+                        <div class="menu-title">Quattro Stagioni </div>
+                        <span style="left: 1px; right: 1px;" class="menu-line"></span>
+                      </span>
+                      <span class="menu-subtitle">Tomato and mozzarella, mushrooms, cooked ham, artichokes and black olives</span>
+                    </div>                     
+                    <div class="mix category-1 menu-restaurant" data-myorder="2">
+                        <span class="clearfix">
+                        <div class="menu-title">Parma</div>
+                        <span style="left: 1px; right: 1px;" class="menu-line"></span>
+                      </span>
+                      <span class="menu-subtitle">Tomato and buffalo mozzarella, finished with Parma ham, rocket and Parmesan shavings</span>
+                    </div>                    
+                    <div class="mix category-1 menu-restaurant" data-myorder="2">
+                        <span class="clearfix">
+                        <div class="menu-title">Quattro Formaggi (V)</div>
+                        <span style="left: 1px; right: 1px;" class="menu-line"></span>
+                      </span>
+                      <span class="menu-subtitle">Tomato, mozzarella & various cheese<br>&nbsp;</span>
+                      
+                    </div>
+                    <div class="mix category-1 menu-restaurant" data-myorder="2">
+                        <span class="clearfix">
+                        <div class="menu-title">Tuna</div>
+                        <span style="left: 1px; right: 1px;" class="menu-line"></span>
+                      </span>
+                      <span class="menu-subtitle">Tomato, mozzarella, tuna and red onion finished garlic sauce</span>
+                    </div>               
+                    <span class="clearfix"></span>
+                    <div class="col-md-12 mix category-1 text-center">
+                        <h4>CARNI</h4>
+                 	</div><span class="clearfix"></span>
+
+
+                    <div class="mix category-1 menu-restaurant" data-myorder="2">
+                        <span class="clearfix">
+                        <div class="menu-title">Pollo alla Rustica</div>
+                        <span style="left: 1px; right: 1px;" class="menu-line"></span>
+                      </span>
+                      <span class="menu-subtitle">Breaded chicken breast served with grilled vegetables and roasted potatoes</span>
+                    </div>
+                    <div class="mix category-1 menu-restaurant" data-myorder="2">
+                        <span class="clearfix">
+                        <div class="menu-title">Pollo alla Valdostana</div>
+                        <span style="left: 1px; right: 1px;" class="menu-line"></span>
+                      </span>
+                      <span class="menu-subtitle">Breaded chicken breast served with mushroom, ham and melted cheese<br>&nbsp;</span>
+                    </div>                    
+                    <div class="mix category-1 menu-restaurant" data-myorder="2">
+                        <span class="clearfix">
+                        <div class="menu-title">Bistecca  di Manzo</div>
+                        <span style="left: 1px; right: 1px;" class="menu-line"></span>
+                      </span>
+                      <span class="menu-subtitle">Rib-Eye steak served with rocket, Parmesan and  roasted potatoes</span>
+                    </div><span class="clearfix"></span>
+					<div class="col-md-12 mix category-1 text-center">
+                        <h4>CONTORNO</h4>
+                 	</div><span class="clearfix"></span>
+
+                    <div class="mix category-1 menu-restaurant" data-myorder="2">
+                        <span class="clearfix">
+                        <div class="menu-title">Insalata di Pomodoro</div>
+                        <span style="left: 1px; right: 1px;" class="menu-line"></span>
+                      </span>
+                      <span class="menu-subtitle">Tomato, onion and fresh basil salad</span>
+                    </div>                    
+                    <div class="mix category-1 menu-restaurant" data-myorder="2">
+                        <span class="clearfix">
+                        <div class="menu-title">Insala mista</div>
+                        <span style="left: 1px; right: 1px;" class="menu-line"></span>
+                      </span>
+                      <span class="menu-subtitle">Mixed leaves salad and tomato</span>
+                    </div>                                                            
+                    <div class="mix category-1 menu-restaurant" data-myorder="2">
+                        <span class="clearfix">
+                        <div class="menu-title">Insalata di Rucola</div>
+                        <span style="left: 1px; right: 1px;" class="menu-line"></span>
+                      </span>
+                      <span class="menu-subtitle">Rocket  cherry tomatoes and Parmesan shaves</span>
+                    </div>                    
+                    <div class="mix category-1 menu-restaurant" data-myorder="2">
+                        <span class="clearfix">
+                        <div class="menu-title">Patate al Forno</div>
+                        <span style="left: 1px; right: 1px;" class="menu-line"></span>
+                      </span>
+                      <span class="menu-subtitle">Rosemary roasted potatoes</span>
+                    </div>
+<!--DRINKS--><span class="clearfix"></span>
+				<div class="col-md-12 mix category-2 text-center">
+					<h4>COCKTAILS</h4>
+                </div><span class="clearfix"></span>
+
+                <div class="mix category-2 menu-restaurant" data-myorder="2">
+                        <span class="clearfix">
+                        <div class="menu-title">Americano</div>
+                        <span style="left: 1px; right: 1px;" class="menu-line"></span>
+                      </span>
+                      <span class="menu-subtitle">Campari, Sweet Vermouth and Soda</span>
+                </div>
+                <div class="mix category-2 menu-restaurant" data-myorder="2">
+                        <span class="clearfix">
+                        <div class="menu-title">Manathan</div>
+                        <span style="left: 1px; right: 1px;" class="menu-line"></span>
+                      </span>
+                      <span class="menu-subtitle">Rye Whiskey, Sweet Vermouth and Angostura</span>
+                </div>
+                <div class="mix category-2 menu-restaurant" data-myorder="2">
+                        <span class="clearfix">
+                        <div class="menu-title">Dry Martini</div>
+                        <span style="left: 1px; right: 1px;" class="menu-line"></span>
+                      </span>
+                      <span class="menu-subtitle">Gin or Vodka and Dry Vermouth</span>
+                </div>
+                <div class="mix category-2 menu-restaurant" data-myorder="2">
+                        <span class="clearfix">
+                        <div class="menu-title">Apple Martini</div>
+                        <span style="left: 1px; right: 1px;" class="menu-line"></span>
+                      </span>
+                      <span class="menu-subtitle">Vodka, Teichenné Liquor and Apple Juice</span>
+                </div>
+                <div class="mix category-2 menu-restaurant" data-myorder="2">
+                        <span class="clearfix">
+                        <div class="menu-title">White Russian</div>
+                        <span style="left: 1px; right: 1px;" class="menu-line"></span>
+                      </span>
+                      <span class="menu-subtitle">Vodka, Kahlua and Fresh Cream</span>
+                </div>
+                <div class="mix category-2 menu-restaurant" data-myorder="2">
+                        <span class="clearfix">
+                        <div class="menu-title">Bloody Mary</div>
+                        <span style="left: 1px; right: 1px;" class="menu-line"></span>
+                      </span>
+                      <span class="menu-subtitle">Vodka, Tomato Juice, Lemon Juice, Tabasco, Salt, Pepper and Worcester Sauce</span>
+                </div>
+                <div class="mix category-2 menu-restaurant" data-myorder="2">
+                        <span class="clearfix">
+                        <div class="menu-title">Amisha Martini</div>
+                        <span style="left: 1px; right: 1px;" class="menu-line"></span>
+                      </span>
+                      <span class="menu-subtitle">Vodka, Espresso and Sugar</span>
+                </div>
+                <div class="mix category-2 menu-restaurant" data-myorder="2">
+                        <span class="clearfix">
+                        <div class="menu-title">Tequila Sunrise</div>
+                        <span style="left: 1px; right: 1px;" class="menu-line"></span>
+                      </span>
+                      <span class="menu-subtitle">Tequila, Orange Juice and Grenadine</span>
+                </div>
+                <div class="mix category-2 menu-restaurant" data-myorder="2">
+                        <span class="clearfix">
+                        <div class="menu-title">Caipirinha</div>
+                        <span style="left: 1px; right: 1px;" class="menu-line"></span>
+                      </span>
+                      <span class="menu-subtitle">Cashaca, Fresh Limes and Brown Sugar</span>
+                </div>
+                <div class="mix category-2 menu-restaurant" data-myorder="2">
+                        <span class="clearfix">
+                        <div class="menu-title">Cosmopolitan</div>
+                        <span style="left: 1px; right: 1px;" class="menu-line"></span>
+                      </span>
+                      <span class="menu-subtitle">Vodka, Cointreau, Lime and Cranberry Juice</span>
+                </div>
+                <div class="mix category-2 menu-restaurant" data-myorder="2">
+                        <span class="clearfix">
+                        <div class="menu-title">Long Island Ice Tea</div>
+                        <span style="left: 1px; right: 1px;" class="menu-line"></span>
+                      </span>
+                      <span class="menu-subtitle">Vodka, Tequila, Cointreau, Gin, Lemon Juice, Gomme Syrup and Coca-Cola</span>
+                </div>
+                <div class="mix category-2 menu-restaurant" data-myorder="2">
+                        <span class="clearfix">
+                        <div class="menu-title">French Martini</div>
+                        <span style="left: 1px; right: 1px;" class="menu-line"></span>
+                      </span>	
+                      <span class="menu-subtitle">Vodka, Chambord and Pineapple Juice<br>&nbsp;</span>
+                </div>
+                  <div class="mix category-2 menu-restaurant" data-myorder="2">
+                        <span class="clearfix">
+                        <div class="menu-title">Bellini</div>
+                        <span style="left: 1px; right: 1px;" class="menu-line"></span>
+                      </span>
+                      <span class="menu-subtitle">Peach Pure and Prosecco</span>
+                </div>
+                <div class="mix category-2 menu-restaurant" data-myorder="2">
+                        <span class="clearfix">
+                        <div class="menu-title">Buck's Fizz</div>
+                        <span style="left: 1px; right: 1px;" class="menu-line"></span>
+                      </span>
+                      <span class="menu-subtitle">Orange Juice and Champagne</span>
+                </div>
+                <div class="mix category-2 menu-restaurant" data-myorder="2">
+                        <span class="clearfix">
+                        <div class="menu-title">Classic Champagne Cocktail</div>
+                        <span style="left: 1px; right: 1px;" class="menu-line"></span>
+                      </span>
+                      <span class="menu-subtitle">Brown Sugar, Angostura, Cognac and Champagne</span>
+                </div><span class="clearfix"></span>
+				<div class="col-md-12 mix category-2 text-center">
+					<h4>SOFT DRINKS</h4>
+                </div><span class="clearfix"></span>
+   
+                <div class="mix category-2 menu-restaurant" data-myorder="2">
+                        <span class="clearfix">
+                        <div class="menu-title">Coca Cola</div>
+                        <span style="left: 1px; right: 1px;" class="menu-line"></span>
+                      </span>
+                </div>
+                <div class="mix category-2 menu-restaurant" data-myorder="2">
+                        <span class="clearfix">
+                        <div class="menu-title">Diet Coca Cola</div>
+                        <span style="left: 1px; right: 1px;" class="menu-line"></span>
+                      </span>
+                </div>
+                <div class="mix category-2 menu-restaurant" data-myorder="2">
+                        <span class="clearfix">
+                        <div class="menu-title">Schweppers Tonic Water</div>
+                        <span style="left: 1px; right: 1px;" class="menu-line"></span>
+                      </span>
+                </div>
+                <div class="mix category-2 menu-restaurant" data-myorder="2">
+                        <span class="clearfix">
+                        <div class="menu-title">Schweppers Slim Lime Tonic</div>
+                        <span style="left: 1px; right: 1px;" class="menu-line"></span>
+                      </span>
+                </div>
+                <div class="mix category-2 menu-restaurant" data-myorder="2">
+                        <span class="clearfix">
+                        <div class="menu-title">Schweppers Gingel Ale</div>
+                        <span style="left: 1px; right: 1px;" class="menu-line"></span>
+                      </span>
+                </div>
+                <div class="mix category-2 menu-restaurant" data-myorder="2">
+                        <span class="clearfix">
+                        <div class="menu-title">Schweppers Soda Water</div>
+                        <span style="left: 1px; right: 1px;" class="menu-line"></span>
+                      </span>
+                </div>
+                <div class="mix category-2 menu-restaurant" data-myorder="2">
+                        <span class="clearfix">
+                        <div class="menu-title">Limonata Sanpellegrino</div>
+                        <span style="left: 1px; right: 1px;" class="menu-line"></span>
+                      </span>
+                </div>
+                <div class="mix category-2 menu-restaurant" data-myorder="2">
+                        <span class="clearfix">
+                        <div class="menu-title">Aranciata Sanpellegrino</div>
+                        <span style="left: 1px; right: 1px;" class="menu-line"></span>
+                      </span>
+                </div>              <span class="clearfix"></span>
+                <div class="col-md-12 mix category-2 text-center">
+					<h4>MINERAL WATER</h4>
+                </div><span class="clearfix"></span>
+                <div class="mix category-2 menu-restaurant" data-myorder="2">
+                        <span class="clearfix">
+                        <div class="menu-title">Still Water 50ml</div>
+                        <span style="left: 1px; right: 1px;" class="menu-line"></span>
+                      </span>
+                </div>           
+                 <div class="mix category-2 menu-restaurant" data-myorder="2">
+                        <span class="clearfix">
+                        <div class="menu-title">Sparkling Water 50ml</div>
+                        <span style="left: 1px; right: 1px;" class="menu-line"></span>
+                      </span>
+                </div><span class="clearfix"></span>
+                <div class="col-md-12 mix category-2 text-center">
+					<h4>JUICES</h4>
+                </div><span class="clearfix"></span>
+
+                <div class="mix category-2 menu-restaurant" data-myorder="2">
+                        <span class="clearfix">
+                        <div class="menu-title">Orange</div>
+                        <span style="left: 1px; right: 1px;" class="menu-line"></span>
+                      </span>
+                </div>
+                <div class="mix category-2 menu-restaurant" data-myorder="2">
+                        <span class="clearfix">
+                        <div class="menu-title">Apple</div>
+                        <span style="left: 1px; right: 1px;" class="menu-line"></span>
+                      </span>
+                </div>
+                <div class="mix category-2 menu-restaurant" data-myorder="2">
+                        <span class="clearfix">
+                        <div class="menu-title">Cranberry</div>
+                        <span style="left: 1px; right: 1px;" class="menu-line"></span>
+                      </span>
+                </div>                   
+                <div class="mix category-2 menu-restaurant" data-myorder="2">
+                        <span class="clearfix">
+                        <div class="menu-title">Pineapple</div>
+                        <span style="left: 1px; right: 1px;" class="menu-line"></span>
+                      </span>
+                </div>  
+                <div class="mix category-2 menu-restaurant" data-myorder="2">
+                        <span class="clearfix">
+                        <div class="menu-title">Tomato</div>
+                        <span style="left: 1px; right: 1px;" class="menu-line"></span>
+                      </span>
+                </div> <span class="clearfix"></span> 
+                <div class="col-md-12 mix category-2 text-center">
+					<h4>FRESH JUICES</h4>
+                </div><span class="clearfix"></span>
+
+                <div class="mix category-2 menu-restaurant" data-myorder="2">
+                        <span class="clearfix">
+                        <div class="menu-title">Fresh Orange Juice</div>
+                        <span style="left: 1px; right: 1px;" class="menu-line"></span>
+                      </span>
+                </div><span class="clearfix"></span>
+                <div class="col-md-12 mix category-2 text-center">
+					<h4>BEERS</h4>
+                </div><span class="clearfix"></span>
+
+                <div class="mix category-2 menu-restaurant" data-myorder="2">
+                        <span class="clearfix">
+                        <div class="menu-title">INCHNUSA 330ML 4.7%</div>
+                        <span style="left: 1px; right: 1px;" class="menu-line"></span>
+                      </span>
+                </div>                
+                 <div class="mix category-2 menu-restaurant" data-myorder="2">
+                        <span class="clearfix">
+                        <div class="menu-title"> Moretti 330ml 4.6%</div>
+                        <span style="left: 1px; right: 1px;" class="menu-line"></span>
+                      </span>
+                </div> 
+                <div class="mix category-2 menu-restaurant" data-myorder="2">
+                        <span class="clearfix">
+                        <div class="menu-title">Peroni Red 330ml 4.7%</div>
+                        <span style="left: 1px; right: 1px;" class="menu-line"></span>
+                      </span>
+                </div>                                
+                <div class="mix category-2 menu-restaurant" data-myorder="2">
+                        <span class="clearfix">
+                        <div class="menu-title">Peroni Nastro Azzurro 330ml 5.1%</div>
+                        <span style="left: 1px; right: 1px;" class="menu-line"></span>
+                      </span>
+                </div>             
+                <div class="mix category-2 menu-restaurant" data-myorder="2">
+                        <span class="clearfix">
+                        <div class="menu-title">Peroni Gran Riserva 330ml 6.6%</div>
+                        <span style="left: 1px; right: 1px;" class="menu-line"></span>
+                      </span>
+                </div>
+    <!--DOLCI--><span class="clearfix"></span>
+    			<div class="col-md-12 mix category-3 text-center">
+					<h4>DOLCI</h4>
+                </div>            				<span class="clearfix"></span>
+
+                <div class="mix category-3 menu-restaurant" data-myorder="2">
+                        <span class="clearfix">
+                        <div class="menu-title">Gelati & Sorbetti</div>
+                        <span style="left: 1px; right: 1px;" class="menu-line"></span>
+                      </span>
+                      <span class="menu-subtitle">Ice cream and sorbet selection</span>
+                </div>
+                <div class="mix category-3 menu-restaurant" data-myorder="2">
+                        <span class="clearfix">
+                        <div class="menu-title">Tortino Fondente al Cioccolato</div>
+                        <span style="left: 1px; right: 1px;" class="menu-line"></span>
+                      </span>
+                      <span class="menu-subtitle">Baked home made chocolate fondant served with pistachio ice cream</span>
+                </div>
+                <div class="mix category-3 menu-restaurant" data-myorder="2">
+                        <span class="clearfix">
+                        <div class="menu-title">Tiramisú della Casa</div>
+                        <span style="left: 1px; right: 1px;" class="menu-line"></span>
+                      </span>
+                      <span class="menu-subtitle">Home made tiramisú</span>
+                </div>
+                <div class="mix category-3 menu-restaurant" data-myorder="2">
+                        <span class="clearfix">
+                        <div class="menu-title">Panna Cotta alla Vaniglia</div>
+                        <span style="left: 1px; right: 1px;" class="menu-line"></span>
+                      </span>
+                      <span class="menu-subtitle">Home made vanilla scented panna cotta served with chocolate sauce</span>
+                </div>
+                <div class="mix category-3 menu-restaurant" data-myorder="2">
+                        <span class="clearfix">
+                        <div class="menu-title">Torta al Cioccolato</div>
+                        <span style="left: 1px; right: 1px;" class="menu-line"></span>
+                      </span>
+                      <span class="menu-subtitle">Home made chocolate cake served with vanilla ice cream</span>
+                </div>
+                <div class="mix category-3 menu-restaurant" data-myorder="2">
+                        <span class="clearfix">
+                        <div class="menu-title">Torta Caprese al Limone</div>
+                        <span style="left: 1px; right: 1px;" class="menu-line"></span>
+                      </span>
+                      <span class="menu-subtitle">Classic lemon cake from Capri.</span>
+                </div>
+                <div class="mix category-3 menu-restaurant" data-myorder="2">
+                        <span class="clearfix">
+                        <div class="menu-title">Affogato al Caffé</div>
+                        <span style="left: 1px; right: 1px;" class="menu-line"></span>
+                      </span>
+                      <span class="menu-subtitle">Vanilla ice cream served with espresso and a touch of Amaretto liqueur</span>
+                </div>
+                <div class="mix category-3 menu-restaurant" data-myorder="2">
+                        <span class="clearfix">
+                        <div class="menu-title">Degustazione Formaggi</div>
+                        <span style="left: 1px; right: 1px;" class="menu-line"></span>
+                      </span>
+                      <span class="menu-subtitle">Selection of cheeses served with home made bread</span>
+                </div><span class="clearfix"></span>
+				<div class="col-md-12 mix category-3 text-center">
+					<h4>HOT DRINKS</h4>
+                </div>    <span class="clearfix"></span>                            
+                <div class="mix category-3 menu-restaurant" data-myorder="2">
+                        <span class="clearfix">
+                        <div class="menu-title">Espresso</div>
+                        <span style="left: 1px; right: 1px;" class="menu-line"></span>
+                      </span>
+                </div>
+                <div class="mix category-3 menu-restaurant" data-myorder="2">
+                        <span class="clearfix">
+                        <div class="menu-title">Filter Coffee</div>
+                        <span style="left: 1px; right: 1px;" class="menu-line"></span>
+                      </span>
+                </div>
+                <div class="mix category-3 menu-restaurant" data-myorder="2">
+                        <span class="clearfix">
+                        <div class="menu-title">Double Espresso</div>
+                        <span style="left: 1px; right: 1px;" class="menu-line"></span>
+                      </span>
+                </div>
+                <div class="mix category-3 menu-restaurant" data-myorder="2">
+                        <span class="clearfix">
+                        <div class="menu-title">Cappuccino</div>
+                        <span style="left: 1px; right: 1px;" class="menu-line"></span>
+                      </span>
+                </div>
+                <div class="mix category-3 menu-restaurant" data-myorder="2">
+                        <span class="clearfix">
+                        <div class="menu-title">Caffe Latte</div>
+                        <span style="left: 1px; right: 1px;" class="menu-line"></span>
+                      </span>
+                </div>
+                <div class="mix category-3 menu-restaurant" data-myorder="2">
+                        <span class="clearfix">
+                        <div class="menu-title">English Breakfast Tea</div>
+                        <span style="left: 1px; right: 1px;" class="menu-line"></span>
+                      </span>
+                </div>
+                <div class="mix category-3 menu-restaurant" data-myorder="2">
+                        <span class="clearfix">
+                        <div class="menu-title">Camomile Tea</div>
+                        <span style="left: 1px; right: 1px;" class="menu-line"></span>
+                      </span>
+                </div>
+                <div class="mix category-3 menu-restaurant" data-myorder="2">
+                        <span class="clearfix">
+                        <div class="menu-title">Peppermint Tea</div>
+                        <span style="left: 1px; right: 1px;" class="menu-line"></span>
+                      </span>
+                </div>             <span class="clearfix"></span> 
+                <div class="col-md-12 mix category-3 text-center">
+					<h4>DIGESTIVI 25 ml</h4>
+                </div> 				<span class="clearfix"></span>
+
+                <div class="mix category-3 menu-restaurant" data-myorder="2">
+                        <span class="clearfix">
+                        <div class="menu-title">Limoncello</div>
+                        <span style="left: 1px; right: 1px;" class="menu-line"></span>
+                      </span>
+                </div>           
+                 <div class="mix category-3 menu-restaurant" data-myorder="2">
+                        <span class="clearfix">
+                        <div class="menu-title">Grappa</div>
+                        <span style="left: 1px; right: 1px;" class="menu-line"></span>
+                      </span>
+                </div>                
+                <div class="mix category-3 menu-restaurant" data-myorder="2">
+                        <span class="clearfix">
+                        <div class="menu-title">Galliano</div>
+                        <span style="left: 1px; right: 1px;" class="menu-line"></span>
+                      </span>
+                </div>
+                <div class="mix category-3 menu-restaurant" data-myorder="2">
+                        <span class="clearfix">
+                        <div class="menu-title">Frangelico</div>
+                        <span style="left: 1px; right: 1px;" class="menu-line"></span>
+                      </span>
+                </div>
+                <div class="mix category-3 menu-restaurant" data-myorder="2">
+                        <span class="clearfix">
+                        <div class="menu-title">Amaro Montenegro</div>
+                        <span style="left: 1px; right: 1px;" class="menu-line"></span>
+                      </span>
+                </div>                   
+                <div class="mix category-3 menu-restaurant" data-myorder="2">
+                        <span class="clearfix">
+                        <div class="menu-title">Sambuca</div>
+                        <span style="left: 1px; right: 1px;" class="menu-line"></span>
+                      </span>
+                </div>  
+                <div class="mix category-3 menu-restaurant" data-myorder="2">
+                        <span class="clearfix">
+                        <div class="menu-title">Jagermeifter</div>
+                        <span style="left: 1px; right: 1px;" class="menu-line"></span>
+                      </span>
+                </div>  
+                <div class="mix category-3 menu-restaurant" data-myorder="2">
+                        <span class="clearfix">
+                        <div class="menu-title">Kahlua</div>
+                        <span style="left: 1px; right: 1px;" class="menu-line"></span>
+                      </span>
+                </div>               
+                <div class="mix category-3 menu-restaurant" data-myorder="2">
+                        <span class="clearfix">
+                        <div class="menu-title"> Contreau</div>
+                        <span style="left: 1px; right: 1px;" class="menu-line"></span>
+                      </span>
+                </div>                
+                 <div class="mix category-3 menu-restaurant" data-myorder="2">
+                        <span class="clearfix">
+                        <div class="menu-title"> Tia Maria</div>
+                        <span style="left: 1px; right: 1px;" class="menu-line"></span>
+                      </span>
+                </div> 
+                <div class="mix category-3 menu-restaurant" data-myorder="2">
+                        <span class="clearfix">
+                        <div class="menu-title"> Drambuie</div>
+                        <span style="left: 1px; right: 1px;" class="menu-line"></span>
+                      </span>
+                </div><span class="clearfix"></span>
+                <div class="col-md-12 mix category-3 text-center">
+					<h4>LIQUEURS COFFEES</h4>
+                </div>            				<span class="clearfix"></span>
+
+                <div class="mix category-3 menu-restaurant" data-myorder="2">
+                        <span class="clearfix">
+                        <div class="menu-title">Calyspo Coffee</div>
+                        <span style="left: 1px; right: 1px;" class="menu-line"></span>
+                      </span>
+                      <span class="menu-subtitle">Coffee, Double Cream and Tia Maria</span>
+                </div>            
+                <div class="mix category-3 menu-restaurant" data-myorder="2">
+                        <span class="clearfix">
+                        <div class="menu-title">Royal Coffee</div>
+                        <span style="left: 1px; right: 1px;" class="menu-line"></span>
+                      </span>
+                      <span class="menu-subtitle">Coffee, Double Cream and Cognac</span>
+                </div>            
+                <div class="mix category-3 menu-restaurant" data-myorder="2">
+                        <span class="clearfix">
+                        <div class="menu-title">Mexican Coffee</div>
+                        <span style="left: 1px; right: 1px;" class="menu-line"></span>
+                      </span>
+                      <span class="menu-subtitle">Coffee, Double Cream and Tequila</span>
+                </div>            
+                <div class="mix category-3 menu-restaurant" data-myorder="2">
+                        <span class="clearfix">
+                        <div class="menu-title">Irish Coffee</div>
+                        <span style="left: 1px; right: 1px;" class="menu-line"></span>
+                      </span>
+                      <span class="menu-subtitle">Coffee, Double Cream and Jameson's Irish Whiskey.</span>
+                </div>            
+                <div class="mix category-3 menu-restaurant" data-myorder="2">
+                        <span class="clearfix">
+                        <div class="menu-title">Spanish Coffee</div>
+                        <span style="left: 1px; right: 1px;" class="menu-line"></span>
+                      </span>
+                      <span class="menu-subtitle">Coffee, Double Cream and Kahlua</span>
+                </div>            
+                <div class="mix category-3 menu-restaurant" data-myorder="2">
+                        <span class="clearfix">
+                        <div class="menu-title">Galliano Coffee</div>
+                        <span style="left: 1px; right: 1px;" class="menu-line"></span>
+                      </span>
+                      <span class="menu-subtitle">Coffee, Double Cream and Galliano</span>
+                </div>            
+                <div class="mix category-3 menu-restaurant" data-myorder="2">
+                        <span class="clearfix">
+                        <div class="menu-title">Fidel Coffee</div>
+                        <span style="left: 1px; right: 1px;" class="menu-line"></span>
+                      </span>
+                      <span class="menu-subtitle">Coffee, Double Cream and Rum</span>
+                </div>                               
+                <div class="mix category-3 menu-restaurant" data-myorder="2">
+                        <span class="clearfix">
+                        <div class="menu-title">Bayleys Coffee</div>
+                        <span style="left: 1px; right: 1px;" class="menu-line"></span>
+                      </span>
+                      <span class="menu-subtitle">Coffee, Double Cream and Baileys</span>
+                </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+    </main>
+    
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Cafe Amisha</h3>
+                <p>Authentic Italian fine dining in the heart of Bermondsey. Experience the true taste of Italy with our carefully crafted dishes and impeccable service.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-tripadvisor"></i></a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Visit Us</h3>
+                <p><i class="fas fa-map-marker-alt"></i> 123 Italian Way, Bermondsey</p>
+                <p><i class="fas fa-phone"></i> (020) 7123-4567</p>
+                <p><i class="fas fa-envelope"></i> hello@cafeamisha.co.uk</p>
+                <p><i class="fas fa-clock"></i> Mon-Sun: 5pm - 11pm</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <a href="index.html">Home</a>
+                <a href="about.html">Our Story</a>
+                <a href="menu.html">Menu</a>
+                <a href="gallery.html">Gallery</a>
+                <a href="contact.html">Contact</a>
+                <a href="book.html">Reservations</a>
+            </div>
+        </div>
+        <div class="copyright">
+            &copy; 2025 Cafe Amisha — Italian Fine Dining in Bermondsey. Crafted with passion and love.
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mixitup/3.3.1/mixitup.min.js"></script>
+    <script>
+        // Initialize MixItUp for menu filtering
+        var containerEl = document.querySelector('#Container');
+        if(containerEl) {
+            var mixer = mixitup(containerEl, {
+                animation: {
+                    duration: 300
+                }
+            });
+        }
+        
+        // Add active class to filter buttons
+        document.addEventListener('DOMContentLoaded', function() {
+            var filterButtons = document.querySelectorAll('.filter');
+            
+            filterButtons.forEach(function(button) {
+                button.addEventListener('click', function() {
+                    // Remove active class from all buttons
+                    filterButtons.forEach(function(btn) {
+                        btn.classList.remove('active');
+                    });
+                    
+                    // Add active class to clicked button
+                    this.classList.add('active');
+                });
+            });
+        });
+    </script>
+</body>
+</html>

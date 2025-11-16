@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reservations | Cafe Amisha</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Playfair+Display:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #c41e3a;
+            --accent: #13824b;
+            --text-dark: #1a1a1a;
+            --text-medium: #3d3d3d;
+            --text-light: #6b6b6b;
+            --white: #ffffff;
+            --light-bg: #fbfbfb;
+            --border: #efefef;
+            --shadow: 0 4px 24px rgba(44, 44, 44, 0.06);
+            --border-radius: 12px;
+            --transition: all 0.28s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { background: var(--white); color: var(--text-dark); font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+
+        /* Header */
+        header {
+            background: var(--white);
+            padding: 1.2rem 2.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: var(--shadow);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .logo { display: flex; align-items: center; gap: 1rem; text-decoration: none; }
+        .logo-img { height: 48px; width: 120px; border-radius: 8px; object-fit: cover; border: 1px solid var(--border); }
+        .logo h1 { font-family: "Playfair Display", serif; font-size: 1.6rem; color: var(--primary); margin: 0; }
+
+        nav ul { display: flex; align-items: center; gap: 1.5rem; list-style: none; margin: 0; padding: 0; }
+        nav ul li a { text-decoration: none; color: var(--text-medium); font-weight: 500; padding: 0.6rem 1.2rem; border-radius: 8px; transition: var(--transition); display: flex; align-items: center; gap: 0.5rem; }
+        nav ul li a:hover, nav ul li a.active { color: var(--primary); background: rgba(196,30,58,0.05); }
+
+        .book-btn { background: linear-gradient(135deg, var(--accent), #0f6b3f); color: var(--white) !important; border-radius: 30px; padding: 0.7rem 1.4rem; font-weight: 600; }
+
+        /* Main */
+        main { min-height: calc(100vh - 300px); padding: 3rem 0; background: var(--light-bg); }
+        .container { max-width: 1100px; margin: 0 auto; padding: 0 2rem; }
+
+        .section-title { text-align: center; font-family: "Playfair Display", serif; font-size: 2.8rem; margin: 0 0 1rem; color: var(--text-dark); font-weight: 700; }
+        .section-subtitle { text-align: center; color: var(--text-light); margin-bottom: 3rem; font-size: 1.05rem; }
+
+        /* Booking widget container */
+        .booking-container { background: var(--white); border-radius: var(--border-radius); padding: 2rem; box-shadow: var(--shadow); }
+
+        /* Tab buttons */
+        .booking-tabs { display: flex; gap: 0.8rem; margin-bottom: 2rem; border-bottom: 2px solid var(--border); }
+        .booking-tab-btn {
+            padding: 1rem 1.6rem;
+            border: none;
+            background: transparent;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 1rem;
+            color: var(--text-light);
+            transition: var(--transition);
+            position: relative;
+            border-bottom: 3px solid transparent;
+        }
+
+        .booking-tab-btn[aria-selected="true"] {
+            color: var(--primary);
+            border-bottom-color: var(--primary);
+        }
+
+        .booking-tab-btn:hover { color: var(--text-dark); }
+
+        /* Widgets */
+        .booking-widget { display: none; }
+        .booking-widget.active { display: block; animation: fadeIn 0.3s ease-in; }
+
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        .booking-widget iframe { width: 100%; border: none; border-radius: 8px; min-height: 650px; }
+
+        /* Quandoo widget container */
+        #quandoo-booking-widget { width: 100%; }
+
+        /* Fallback info */
+        .booking-info {
+            background: rgba(196,30,58,0.02);
+            border-left: 4px solid var(--primary);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-top: 2rem;
+            font-size: 0.95rem;
+            color: var(--text-medium);
+        }
+
+        .booking-info p { margin: 0.5rem 0; }
+        .booking-info a { color: var(--primary); font-weight: 600; text-decoration: none; }
+        .booking-info a:hover { text-decoration: underline; }
+
+        /* Footer */
+        footer { background: var(--white); color: var(--text-medium); border-top: 1px solid var(--border); padding: 3rem 0 1rem; }
+        .footer-content { max-width: 1100px; margin: 0 auto; padding: 0 2rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; }
+        .footer-section h3 { color: var(--text-dark); margin-bottom: 1rem; font-size: 1.2rem; }
+        .footer-section a { display: block; color: var(--text-medium); text-decoration: none; margin: 0.6rem 0; transition: var(--transition); }
+        .footer-section a:hover { color: var(--primary); }
+        .social-links { display: flex; gap: 1rem; margin-top: 1rem; }
+        .social-links a { width: 40px; height: 40px; border-radius: 50%; background: var(--light-bg); display: flex; align-items: center; justify-content: center; font-size: 1.1rem; color: var(--primary); }
+        .social-links a:hover { background: linear-gradient(135deg, var(--primary), var(--accent)); color: var(--white); }
+        .copyright { text-align: center; padding-top: 2rem; border-top: 1px solid var(--border); margin-top: 2rem; font-size: 0.9rem; color: var(--text-light); }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            header { flex-direction: column; gap: 1rem; padding: 1rem 1.5rem; }
+            nav ul { flex-direction: column; width: 100%; }
+            nav ul li a { width: 100%; justify-content: center; }
+            .booking-tabs { flex-wrap: wrap; }
+            .booking-tab-btn { padding: 0.8rem 1.2rem; font-size: 0.95rem; }
+            .booking-container { padding: 1.5rem; }
+            .section-title { font-size: 2rem; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <a href="index.html" class="logo">
+            <img class="logo-img" src="https://th.bing.com/th/id/R.ba06966f143148b38d522236559678e9?rik=dV0BK2CcMStoVw&riu=http%3a%2f%2fwww.cafeamisha.co.uk%2fimg%2flogo-white.png&ehk=r8UsJTswgx9wplnnCnRVyVNY6kuZFqWilITSCBofBCo%3d&risl=&pid=ImgRaw&r=0" alt="Cafe Amisha">
+            <h1>Cafe Amisha</h1>
+        </a>
+
+        <nav aria-label="Primary">
+            <ul>
+                <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+                <li><a href="about.html"><i class="fas fa-info-circle"></i> About</a></li>
+                <li><a href="book_venue.html"><i class="fas fa-building"></i> Venues</a></li>
+                <li><a href="contact.html"><i class="fas fa-envelope"></i> Contact</a></li>
+                <li><a href="book.html" class="active"><i class="fas fa-calendar-check"></i> Reservations</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <div class="container">
+            <h1 class="section-title">Make a Reservation</h1>
+            <p class="section-subtitle">Book your table at Cafe Amisha through your preferred platform</p>
+
+            <!-- Booking Container -->
+            <div class="booking-container">
+                <!-- Tab Buttons -->
+                <div class="booking-tabs" role="tablist">
+                    <button class="booking-tab-btn" id="tab-opentable" data-tab="opentable-widget" aria-selected="true" aria-controls="opentable-widget" role="tab">
+                        <i class="fas fa-book"></i> OpenTable
+                    </button>
+                    <button class="booking-tab-btn" id="tab-quandoo" data-tab="quandoo-widget" aria-selected="false" aria-controls="quandoo-widget" role="tab">
+                        <i class="fas fa-utensils"></i> Quandoo
+                    </button>
+                </div>
+
+                <!-- OpenTable Widget -->
+                <div id="opentable-widget" class="booking-widget active" role="tabpanel" aria-labelledby="tab-opentable">
+                    <div style="text-align: center; padding: 3rem 2rem; background: linear-gradient(135deg, rgba(196,30,58,0.03), rgba(19,130,75,0.03)); border-radius: 12px;">
+                        <i class="fas fa-book" style="font-size: 3rem; color: var(--primary); margin-bottom: 1rem; display: block;"></i>
+                        <h3 style="color: var(--text-dark); margin-bottom: 0.8rem; font-size: 1.4rem;">Book on OpenTable</h3>
+                        <p style="color: var(--text-light); margin-bottom: 1.5rem; max-width: 500px; margin-left: auto; margin-right: auto;">
+                            OpenTable provides a secure booking experience. Click the button below to make your reservation.
+                        </p>
+                        <a href="https://www.opentable.co.uk/r/cafe-amisha-london" target="_blank" rel="noopener noreferrer" style="
+                            display: inline-flex;
+                            align-items: center;
+                            gap: 0.6rem;
+                            background: linear-gradient(135deg, var(--primary), #9c172e);
+                            color: white;
+                            padding: 0.9rem 2rem;
+                            border-radius: 30px;
+                            text-decoration: none;
+                            font-weight: 700;
+                            box-shadow: 0 6px 20px rgba(196,30,58,0.2);
+                            transition: var(--transition);
+                        " onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 8px 28px rgba(196,30,58,0.28)';" onmouseout="this.style.transform='none'; this.style.boxShadow='0 6px 20px rgba(196,30,58,0.2)';">
+                            <i class="fas fa-external-link-alt"></i> Open OpenTable
+                        </a>
+                        <p style="color: var(--text-muted); font-size: 0.85rem; margin-top: 1.5rem;">
+                            Opens in a new window • Secure booking platform
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Quandoo Widget -->
+                <div id="quandoo-widget" class="booking-widget" role="tabpanel" aria-labelledby="tab-quandoo">
+                    <div style="text-align: center; padding: 3rem 2rem; background: linear-gradient(135deg, rgba(196,30,58,0.03), rgba(19,130,75,0.03)); border-radius: 12px;">
+                        <i class="fas fa-utensils" style="font-size: 3rem; color: var(--accent); margin-bottom: 1rem; display: block;"></i>
+                        <h3 style="color: var(--text-dark); margin-bottom: 0.8rem; font-size: 1.4rem;">Book on Quandoo</h3>
+                        <p style="color: var(--text-light); margin-bottom: 1.5rem; max-width: 500px; margin-left: auto; margin-right: auto;">
+                            Quandoo makes it easy to reserve your table. Click the button below to browse availability and book now.
+                        </p>
+                        <a href="https://www.quandoo.co.uk/place/cafe-amisha-7318/menu?msclkid=d3b583246e1d14b44f57ea3db2e706de&utm_source=bing&utm_medium=cpc&utm_campaign=EN_GB_SEM_MER_10001871_BING_10007318&utm_term=Cafe%20Amisha%20-%20Bermondsey%20London&utm_content=10007318_m01_EN_GB" target="_blank" rel="noopener noreferrer" style="
+                            display: inline-flex;
+                            align-items: center;
+                            gap: 0.6rem;
+                            background: linear-gradient(135deg, var(--accent), #0f6b3f);
+                            color: white;
+                            padding: 0.9rem 2rem;
+                            border-radius: 30px;
+                            text-decoration: none;
+                            font-weight: 700;
+                            box-shadow: 0 6px 20px rgba(19,130,75,0.2);
+                            transition: var(--transition);
+                        " onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 8px 28px rgba(19,130,75,0.28)';" onmouseout="this.style.transform='none'; this.style.boxShadow='0 6px 20px rgba(19,130,75,0.2)';">
+                            <i class="fas fa-external-link-alt"></i> Open Quandoo
+                        </a>
+                        <p style="color: var(--text-muted); font-size: 0.85rem; margin-top: 1.5rem;">
+                            Opens in a new window • Browse menu & availability
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Booking Info -->
+                <div class="booking-info">
+                    <p><strong><i class="fas fa-phone"></i> Prefer to call?</strong></p>
+                    <p>Make your reservation by phone: <a href="tel:+442071234567">(020) 7123-4567</a></p>
+                    <p style="margin-top: 1rem;"><strong><i class="fas fa-envelope"></i> Email:</strong> <a href="mailto:reservations@cafeamisha.co.uk">reservations@cafeamisha.co.uk</a></p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Cafe Amisha</h3>
+                <p>Authentic Italian dining in Bermondsey. Experience seasonal ingredients and handmade pasta.</p>
+                <div class="social-links">
+                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Location</h3>
+                <p>Bermondsey, London SE1</p>
+                <p><a href="tel:+442071234567">(020) 7123-4567</a></p>
+                <p><a href="mailto:info@cafeamisha.co.uk">info@cafeamisha.co.uk</a></p>
+            </div>
+            <div class="footer-section">
+                <h3>Hours</h3>
+                <p>Mon: Closed</p>
+                <p>Tue-Sat: 12:00 - 22:30</p>
+                <p>Sun: 12:00 - 21:00</p>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2025 Cafe Amisha. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Quandoo Widget Script -->
+    <script src="https://booking-widget.quandoo.com/index.js" data-merchant-id="7318" data-theme="brand"></script>
+
+    <!-- Tab Switching Script -->
+    <script>
+        (function(){
+            const tabs = document.querySelectorAll('.booking-tab-btn');
+            const widgets = document.querySelectorAll('.booking-widget');
+
+            if(!tabs.length || !widgets.length) return;
+
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    const targetId = tab.dataset.tab;
+
+                    // Update all tabs
+                    tabs.forEach(t => {
+                        const isActive = t.dataset.tab === targetId;
+                        t.setAttribute('aria-selected', isActive);
+                    });
+
+                    // Show/hide widgets
+                    widgets.forEach(widget => {
+                        if(widget.id === targetId) {
+                            widget.classList.add('active');
+                        } else {
+                            widget.classList.remove('active');
+                        }
+                    });
+                });
+
+                // Keyboard support (arrow keys to switch tabs)
+                tab.addEventListener('keydown', (e) => {
+                    if(e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
+                        e.preventDefault();
+                        const tabArray = Array.from(tabs);
+                        const currentIdx = tabArray.indexOf(tab);
+                        const nextIdx = e.key === 'ArrowRight' 
+                            ? (currentIdx + 1) % tabArray.length 
+                            : (currentIdx - 1 + tabArray.length) % tabArray.length;
+                        tabArray[nextIdx].focus();
+                        tabArray[nextIdx].click();
+                    }
+                });
+            });
+        })();
+    </script>
+</body>
+</html>

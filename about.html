@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Our Story | Cafe Amisha</title>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Playfair+Display:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg:#f6f5f1;
+      --paper:#fffdf7;
+      --accent:#c41e3a;
+      --accent-dark:#9c172e;
+      --accent-2:#1a936f;
+      --accent-2-dark:#157a5d;
+      --muted:#6b7280;
+      --text:#222;
+      --text-light:#5a5a5a;
+      --shadow:0 10px 30px rgba(25,25,25,0.06);
+      --shadow-hover:0 15px 40px rgba(25,25,25,0.12);
+      --radius:12px;
+      --container:1100px;
+      --transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0;font-family:Montserrat,system-ui,Arial,sans-serif;color:var(--text);background:var(--bg);-webkit-font-smoothing:antialiased;line-height:1.6;}
+    a{color:var(--accent);text-decoration:none;transition:var(--transition);}
+    a:hover{color:var(--accent-dark);}
+
+    /* Header (same visual system as homepage) */
+    header{background:var(--paper);box-shadow:var(--shadow);position:sticky;top:0;z-index:120;border-bottom:1px solid rgba(0,0,0,0.03);}
+    .header-inner{max-width:var(--container);margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:0.9rem 1.25rem;}
+    .logo{display:flex;align-items:center;gap:.9rem;text-decoration:none;}
+    .logo-img{height:48px;width:120px;object-fit:cover;border-radius:10px;border:1px solid #eee;transition:var(--transition);}
+    .logo:hover .logo-img{transform:scale(1.02);box-shadow:0 4px 12px rgba(196,30,58,0.1);}
+    .brand{font-family:"Playfair Display",serif;color:var(--accent);font-size:1.15rem;font-weight:700;}
+
+    nav{display:flex;align-items:center;gap:1rem;}
+    .nav-list{display:flex;gap:0.6rem;align-items:center;margin:0;padding:0;list-style:none;}
+    .nav-link{display:inline-flex;align-items:center;gap:.5rem;padding:.45rem .8rem;border-radius:10px;font-weight:600;color:var(--text);transition:var(--transition);}
+    .nav-link i{color:var(--muted);transition:var(--transition);}
+    .nav-link:hover,.nav-link:focus,.nav-link.active{background:#fff5f7;color:var(--accent);}
+    .nav-link:hover i,.nav-link:focus i,.nav-link.active i{color:var(--accent);}
+    .cta{background:linear-gradient(90deg,var(--accent-2),var(--accent-2-dark));color:#fff;padding:.45rem .9rem;border-radius:22px;font-weight:700;display:inline-flex;gap:.5rem;align-items:center;transition:var(--transition);}
+    .cta:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(26,147,111,0.2);}
+
+    #nav-toggle{display:none;border:0;background:transparent;font-size:1.2rem;padding:.35rem;border-radius:8px;cursor:pointer;color:var(--text);}
+    @media (max-width:880px){
+      #nav-toggle{display:inline-flex;}
+      .nav-list{position:absolute;right:1rem;top:68px;background:var(--paper);flex-direction:column;padding:.8rem;border-radius:12px;box-shadow:var(--shadow-hover);min-width:220px;transform:scale(.98);opacity:0;visibility:hidden;transition:all .18s;z-index:100;}
+      .nav-list.open{transform:scale(1);opacity:1;visibility:visible;}
+      .nav-link{width:100%;padding:.6rem .9rem;}
+    }
+
+    /* Hero Section */
+    .hero-section {
+    background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url("article_main.png");
+    background-size: cover;
+    background-position: center;
+    color: white;
+    padding: 4rem 1.25rem;
+    margin-bottom: 2rem;
+    border-radius: var(--radius);
+}
+.hero-content {
+    max-width: var(--container);
+    margin: 0 auto;
+    text-align: center;
+}
+.hero-content h1 {
+    font-family: "Playfair Display", serif;
+    font-size: 3rem;
+    margin: 0 0 1rem;
+    font-weight: 700;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+.hero-content p {
+    font-size: 1.2rem;
+    max-width: 700px;
+    margin: 0 auto;
+    opacity: 0.9;
+}
+   
+
+    /* Newspaper visual theme */
+    .container{max-width:var(--container);margin:2rem auto;padding:0 1.25rem;}
+    .paper{background:var(--paper);border-radius:var(--radius);padding:2rem;box-shadow:var(--shadow);border:1px solid rgba(0,0,0,0.03);margin-bottom:2rem;}
+    .masthead{display:flex;align-items:flex-end;gap:1rem;margin-bottom:1.5rem;padding-bottom:1.5rem;border-bottom:1px solid rgba(0,0,0,0.05);}
+    .masthead h1{font-family:"Playfair Display",serif;font-size:2.2rem;margin:0;color:var(--accent);}
+    .masthead .lede{color:var(--muted);font-size:1.1rem;font-weight:500;}
+
+    .byline{color:var(--muted);font-size:.9rem;margin-top:.35rem;}
+
+    .content-wrap{display:grid;grid-template-columns: 1fr 320px;gap:2rem;align-items:start;}
+    main.article{background:transparent;}
+    .article-body{
+      font-size:1rem;
+      line-height:1.7;
+      color:var(--text);
+    }
+    .article-body p{margin:0 0 1.5rem;}
+    .dropcap:first-letter{float:left;font-family:"Playfair Display",serif;font-size:3.5rem;line-height:1;color:var(--accent);margin-right:.35rem;margin-top:.05rem;font-weight:700;}
+    
+    /* Image Gallery */
+    .image-gallery{display:grid;grid-template-columns:repeat(auto-fit, minmax(250px, 1fr));gap:1.5rem;margin:2.5rem 0;}
+    .gallery-item{position:relative;border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);transition:var(--transition);}
+    .gallery-item:hover{transform:translateY(-5px);box-shadow:var(--shadow-hover);}
+    .gallery-item img{width:100%;height:200px;object-fit:cover;display:block;transition:var(--transition);}
+    .gallery-item:hover img{transform:scale(1.05);}
+    
+    figure{margin:0 0 1.5rem;break-inside:avoid;}
+    figure img{width:100%;height:auto;border-radius:8px;display:block;box-shadow:var(--shadow);}
+    figcaption{font-size:.88rem;color:var(--muted);margin-top:.45rem;text-align:center;font-style:italic;}
+
+    /* Highlight Box */
+    .highlight-box{background:linear-gradient(135deg, rgba(196,30,58,0.05), rgba(26,147,111,0.05));border-left:4px solid var(--accent);padding:1.5rem;border-radius:0 var(--radius) var(--radius) 0;margin:2rem 0;}
+    .highlight-box h3{font-family:"Playfair Display",serif;color:var(--accent);margin-top:0;}
+
+    /* Sidebar (similar tone to footer) */
+    aside.sidebar{position:sticky;top:100px;}
+    .card{background:#fff;padding:1.5rem;border-radius:var(--radius);border:1px solid rgba(0,0,0,0.03);box-shadow:var(--shadow);margin-bottom:1.5rem;transition:var(--transition);}
+    .card:hover{box-shadow:var(--shadow-hover);transform:translateY(-3px);}
+    .card h4{margin:0 0 .8rem;font-family:"Playfair Display",serif;color:var(--accent);font-size:1.2rem;}
+    .contact-list p{margin:.5rem 0;color:var(--text-light);display:flex;align-items:flex-start;gap:0.5rem;}
+    .contact-list i{color:var(--accent);width:20px;}
+
+    /* Team Section */
+    .team-section{display:flex;gap:2rem;align-items:center;margin:2.5rem 0;padding:2rem;background:linear-gradient(135deg, rgba(196,30,58,0.03), rgba(26,147,111,0.02));border-radius:var(--radius);}
+    .team-image{flex:0 0 200px;}
+    .team-image img{width:100%;border-radius:var(--radius);box-shadow:var(--shadow);}
+    .team-content{flex:1;}
+    .team-content h3{font-family:"Playfair Display",serif;color:var(--accent);margin-top:0;}
+
+    /* Footer aligned with header styling */
+    footer{background:var(--paper);border-top:1px solid rgba(0,0,0,0.03);padding:2rem 0;margin-top:3rem;}
+    .footer-inner{max-width:var(--container);margin:0 auto;padding:0 1.25rem;display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap;color:var(--muted);}
+    .social{display:flex;gap:1rem;}
+    .social a{display:flex;align-items:center;justify-content:center;width:36px;height:36px;border-radius:50%;background:var(--bg);color:var(--muted);transition:var(--transition);}
+    .social a:hover{background:var(--accent);color:white;}
+    .copyright{font-size:.95rem;color:var(--muted);margin-top:.65rem;text-align:center;width:100%;}
+
+    /* Responsive adjustments */
+    @media (max-width:980px){
+      .content-wrap{grid-template-columns:1fr;}
+      .article-body{column-count:1;}
+      .masthead{flex-direction:column;align-items:flex-start;gap:.4rem;}
+      .team-section{flex-direction:column;text-align:center;}
+      .team-image{flex:0 0 auto;max-width:200px;}
+    }
+    
+    @media (max-width:768px){
+      .hero-content h1{font-size:2.2rem;}
+      .hero-content p{font-size:1rem;}
+      .paper{padding:1.5rem;}
+      .image-gallery{grid-template-columns:1fr;}
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="header-inner">
+      <a href="index.html" class="logo">
+        <img class="logo-img" src="https://th.bing.com/th/id/R.ba06966f143148b38d522236559678e9?rik=dV0BK2CcMStoVw&riu=http%3a%2f%2fwww.cafeamisha.co.uk%2fimg%2flogo-white.png&ehk=r8UsJTswgx9wplnnCnRVyVNY6kuZFqWilITSCBofBCo%3d&risl=&pid=ImgRaw&r=0" alt="Cafe Amisha">
+        <span class="brand">Cafe Amisha</span>
+      </a>
+
+      <nav aria-label="Primary">
+        <button id="nav-toggle" aria-expanded="false" aria-controls="main-nav" aria-label="Open menu">
+          <i class="fas fa-bars" aria-hidden="true"></i>
+        </button>
+
+        <ul id="main-nav" class="nav-list" role="menubar">
+          <li><a class="nav-link" href="index.html"><i class="fas fa-home"></i> Home</a></li>
+          <li><a class="nav-link active" href="about.html"><i class="fas fa-info-circle"></i> About</a></li>
+          <li><a class="nav-link" href="contact.html"><i class="fas fa-envelope"></i> Contact</a></li>
+          <li><a class="nav-link cta" href="book.html"><i class="fas fa-calendar-check"></i> Reserve</a></li>
+          <li><a class="nav-link" href="book_venue.html"><i class="fas fa-building"></i> Venues</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <div class="hero-section">
+    <div class="hero-content">
+      <h1>Our Story</h1>
+      <p>A Bermondsey kitchen turned neighbourhood institution—seasonal Italian food from Amisha's family recipes.</p>
+    </div>
+  </div>
+
+  <div class="container">
+    <section class="paper" aria-labelledby="about-heading">
+      <div class="masthead">
+        <div>
+          <h1 id="about-heading">Our Story</h1>
+          <div class="lede">A Bermondsey kitchen turned neighbourhood institution—seasonal Italian food from Amisha's family recipes.</div>
+          <div class="byline">By Cafe Amisha — updated 2025</div>
+        </div>
+      </div>
+
+      <div class="content-wrap">
+        <main class="article" role="main">
+          <div class="article-body dropcap">
+            <p>Café Amisha is located on Grange Road SE1, very close to the sparkling and lively Bermondsey Street and within walking distance to Tower Bridge and London Bridge – famous touristic attractions in London.</p>
+
+            <figure>
+              <img src="news.2.jpg" alt="Cafe Amisha interior">
+              <figcaption>The warm and inviting interior of Cafe Amisha</figcaption>
+            </figure>
+
+            <p>From day one, the emphasis has been on quality and freshness and the restaurant uses only high quality fresh products sourced locally – fish and meat is delivered daily from local London markets and bread and cakes are baked in the restaurant.</p>
+
+            <div class="highlight-box">
+              <h3>Our Philosophy</h3>
+              <p>All dishes are freshly prepared and cooked to order and served by friendly staff who will work hard to make your dining experience as enjoyable and memorable as possible. On a sunny day guests of Amisha can enjoy their food and drinks in the outside terrace (opened in April 2013).</p>
+            </div>
+
+            <p>With its simple and inspired cooking and exceptional customer service Amisha offers unique dining experience in Bermondsey area and with the highest quality fresh ingredients creates the genuine and authentic Italian 'Mamma style' food.</p>
+
+            <div class="image-gallery">
+              <div class="gallery-item">
+                <img src="news.1.jpg" alt="Cafe Amisha dining area">
+              </div>
+              <div class="gallery-item">
+                <img src="news.2.jpg" alt="Cafe Amisha interior">
+              </div>
+              <div class="gallery-item">
+                <img src="amisha_family.jpg" alt="Cafe Amisha terrace">
+              </div>
+            </div>
+
+            <div class="team-section">
+              <div class="team-image">
+                <img src="boss.png" alt="Amisha, restaurant owner">
+              </div>
+              <div class="team-content">
+                <h3>Meet Amisha</h3>
+                <p>Founded from a love of traditional Italian cooking, Cafe Amisha started as a small neighbourhood kitchen focused on artisanal ingredients and authentic recipes. Over time it grew into a local destination where family recipes meet contemporary technique.</p>
+                <p>The team prioritises seasonal produce and trusted suppliers while blending time-honoured methods with modern presentation. Dishes are prepared from scratch — fresh pasta, slow-simmered sauces and house desserts are prepared daily to reflect the season.</p>
+              </div>
+            </div>
+
+            <h3 style="font-family:'Playfair Display',serif; color:var(--accent)">Origins & Philosophy</h3>
+            <p>Amisha's family roots inspired the menu: simple, ingredient-led cooking with an attention to detail. The kitchen sources local produce and select Italian imports — olive oils, tomatoes, cured items — which are used to build rich, balanced dishes.</p>
+
+            <p>Menus change with the seasons and often include a selection of small plates, handmade pasta and a rotating main course. The cafe also offers private dining and venue hire for larger gatherings.</p>
+
+            <h3 style="font-family:'Playfair Display',serif; color:var(--accent)">The Team</h3>
+            <p>Led by Amisha and a small devoted team of chefs and front-of-house staff, the cafe focuses on hospitality, consistency and culinary craft. The team collaborates with local producers to ensure the menu remains fresh and reflective of each season.</p>
+
+            <p class="byline">For the most up-to-date menus and events, check the reservations page or contact the cafe directly.</p>
+          </div>
+        </main>
+
+        <aside class="sidebar" aria-labelledby="sidebar-heading">
+          <div class="card" id="sidebar-heading">
+            <h4>Visit & Contact</h4>
+            <div class="contact-list">
+              <p><i class="fas fa-map-marker-alt"></i> Grange Road SE1, Bermondsey, London</p>
+              <p><i class="fas fa-phone"></i> <a href="tel:+442071234567">+44 (0)20 7123 4567</a></p>
+              <p><i class="fas fa-envelope"></i> <a href="mailto:hello@cafeamisha.co.uk">hello@cafeamisha.co.uk</a></p>
+              <p><i class="fas fa-clock"></i> Tue–Sun: 12:00—22:00</p>
+              <p><i class="fas fa-walking"></i> Walking distance to Tower Bridge & London Bridge</p>
+            </div>
+          </div>
+
+          <div class="card">
+            <h4>Reservations</h4>
+            <p>Book a table online or call us to reserve. Private dining & venue hire available — see the Venues page for details.</p>
+            <p><a class="cta" href="book.html" style="display:block; text-align:center; margin-top:1rem;"><i class="fas fa-calendar-check"></i> Reserve Now</a></p>
+          </div>
+
+          <div class="card">
+            <h4>Follow Us</h4>
+            <p>Stay updated with our latest menus, events, and special offers.</p>
+            <div class="social">
+              <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+              <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+              <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+            </div>
+          </div>
+          
+          <div class="card">
+            <h4>Our Terrace</h4>
+            <p>Enjoy our beautiful outdoor terrace, opened in April 2013. Perfect for sunny days and al fresco dining.</p>
+            <img src="article_main.png" alt="Cafe Amisha terrace" style="width:100%; border-radius:8px; margin-top:0.5rem;">
+          </div>
+        </aside>
+      </div>
+    </section>
+  </div>
+
+  <footer>
+    <div class="footer-inner">
+      <div>
+        <strong>Cafe Amisha</strong>
+        <div class="copyright">&copy; 2025 Cafe Amisha — Authentic Italian Dining in Bermondsey</div>
+      </div>
+      <div>
+        <a class="nav-link" href="contact.html"><i class="fas fa-map-marker-alt"></i> Visit</a>
+        <a class="nav-link" href="book.html"><i class="fas fa-calendar-check"></i> Reservations</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // small nav toggle behavior
+    (function(){
+      const toggle = document.getElementById('nav-toggle');
+      const nav = document.getElementById('main-nav');
+      if(!toggle || !nav) return;
+      toggle.addEventListener('click', () => {
+        const open = nav.classList.toggle('open');
+        toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+      });
+      // close on outside click
+      document.addEventListener('click', (e) => {
+        if(!nav.contains(e.target) && !toggle.contains(e.target) && nav.classList.contains('open')) {
+          nav.classList.remove('open');
+          toggle.setAttribute('aria-expanded','false');
+        }
+      });
+    })();
+  </script>
+</body>
+</html>
