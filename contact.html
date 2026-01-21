@@ -155,6 +155,39 @@
             width: 70%;
         }
 
+        /* Mobile Menu Toggle */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            background: none;
+            border: none;
+            cursor: pointer;
+            gap: 0.45rem;
+            padding: 0.5rem;
+            z-index: 1001;
+        }
+
+        .menu-toggle span {
+            width: 28px;
+            height: 3px;
+            background: var(--text-dark);
+            border-radius: 2px;
+            transition: var(--transition);
+            display: block;
+        }
+
+        .menu-toggle.active span:nth-child(1) {
+            transform: rotate(45deg) translate(10px, 10px);
+        }
+
+        .menu-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .menu-toggle.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -7px);
+        }
+
         .book-btn {
             background: linear-gradient(135deg, var(--accent), var(--accent-dark));
             color: var(--white) !important;
@@ -586,25 +619,47 @@
 
         @media (max-width: 768px) {
             header {
-                flex-direction: column;
+                flex-wrap: wrap;
                 padding: 1rem 1.5rem;
-                gap: 1rem;
             }
-            
+
+            .menu-toggle {
+                display: flex;
+            }
+
+            nav {
+                position: fixed;
+                top: 70px;
+                left: 0;
+                right: 0;
+                background: var(--white);
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height 0.3s ease;
+                box-shadow: var(--shadow);
+                width: 100%;
+            }
+
+            nav.active {
+                max-height: 500px;
+            }
+
             nav ul {
                 flex-direction: column;
                 gap: 0.5rem;
                 width: 100%;
+                padding: 1rem 0;
             }
-            
+
             nav ul li {
                 width: 100%;
             }
-            
+
             nav ul li a {
                 width: 100%;
                 text-align: center;
                 justify-content: center;
+                padding: 1rem 1.5rem;
             }
             
             .container {
@@ -657,7 +712,7 @@
             <h1>Cafe Amisha</h1>
         </a>
 
-        <nav aria-label="Primary">
+        <nav id="navMenu" aria-label="Primary">
             <ul>
                 <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
                 <li><a href="about.html"><i class="fas fa-info-circle"></i> About</a></li>
@@ -813,6 +868,35 @@
     </footer>
 
     <script>
+        // Mobile menu toggle
+        const menuToggle = document.getElementById('menuToggle');
+        const navMenu = document.getElementById('navMenu');
+        const navLinks = navMenu.querySelectorAll('a');
+
+        menuToggle.addEventListener('click', () => {
+            menuToggle.classList.toggle('active');
+            navMenu.classList.toggle('active');
+            menuToggle.setAttribute('aria-expanded', menuToggle.classList.contains('active'));
+        });
+
+        // Close menu when a link is clicked
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                menuToggle.classList.remove('active');
+                navMenu.classList.remove('active');
+                menuToggle.setAttribute('aria-expanded', false);
+            });
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('header')) {
+                menuToggle.classList.remove('active');
+                navMenu.classList.remove('active');
+                menuToggle.setAttribute('aria-expanded', false);
+            }
+        });
+
         // FAQ functionality
         document.querySelectorAll('.faq-question').forEach(question => {
             question.addEventListener('click', () => {
