@@ -57,53 +57,69 @@
         }
         
        
-		 nav ul li {
-            display: flex;
-            align-items: center;
-        }
+@media (max-width: 768px) {
+    header {
+        flex-wrap: wrap;
+        padding: 1rem 1.5rem;
+    }
 
-        nav ul li a {
-            text-decoration: none;
-            color: var(--text-medium);
-            font-weight: 500;
-            font-size: 1rem;
-            padding: 0.7rem 1.4rem;
-            border-radius: var(--border-radius-sm);
-            transition: var(--transition);
-            position: relative;
-            background: none;
-            border: none;
-            cursor: pointer;
-            outline: none;
-            font-family: inherit;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
+    .menu-toggle {
+        display: flex;
+    }
 
-        nav ul li a::before {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            width: 0;
-            height: 2px;
-            background: var(--primary);
-            transition: var(--transition);
-            transform: translateX(-50%);
-        }
+    nav {
+        position: fixed;
+        top: 68px;
+        right: 0;
+        background: var(--white);
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease;
+        box-shadow: var(--shadow-hover);
+        width: 100%;
+        max-width: 280px;
+        border-radius: 0 0 12px 0;
+        z-index: 99;
+    }
 
-        nav ul li a:hover,
-        nav ul li a:focus {
-            color: var(--primary);
-            background: var(--primary-light);
-        }
+    nav.active {
+        max-height: 600px;
+    }
 
-        nav ul li a:hover::before,
-        nav ul li a:focus::before {
-            width: 70%;
-        }
-      
+    nav ul {
+        flex-direction: column;
+        gap: 0;
+        width: 100%;
+        padding: 0.8rem 0;
+        margin: 0;
+    }
+
+    nav ul li {
+        width: 100%;
+        margin: 0;
+    }
+
+    nav ul li a {
+        width: 100%;
+        text-align: left;
+        justify-content: flex-start;
+        padding: 1rem 1.5rem;
+        border-radius: 0;
+        transition: var(--transition);
+        background: transparent;
+        border-left: 3px solid transparent;
+    }
+
+    nav ul li a:hover {
+        background: rgba(196, 30, 58, 0.05);
+        border-left-color: var(--primary);
+        padding-left: 1.8rem;
+    }
+
+    nav ul li a::before {
+        display: none;
+    }
+}
         
         /* Mobile Menu Toggle */
         .menu-toggle {
@@ -1625,6 +1641,7 @@ fresh chillies
 </body>
 
 </html>
+
 
 
 
