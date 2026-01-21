@@ -116,12 +116,33 @@
       color: white;
     }
 
-    /* Gallery Grid */
+    /* Gallery Grid - Masonry Layout */
     .gallery-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       gap: 1.5rem;
       margin-top: 2rem;
+      grid-auto-flow: dense;
+    }
+    
+    .gallery-item:nth-child(4n+1) {
+      grid-column: span 2;
+      grid-row: span 2;
+    }
+    
+    .gallery-item:nth-child(4n+2) {
+      grid-column: span 1;
+      grid-row: span 1;
+    }
+    
+    @media (max-width: 900px) {
+      .gallery-grid {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      }
+      .gallery-item:nth-child(4n+1) {
+        grid-column: span 1;
+        grid-row: span 1;
+      }
     }
     
     .gallery-item {
@@ -140,7 +161,7 @@
     
     .gallery-item img {
       width: 100%;
-      height: 220px;
+      height: 100%;
       object-fit: cover;
       display: block;
       transition: var(--transition);
@@ -148,24 +169,6 @@
     
     .gallery-item:hover img {
       transform: scale(1.05);
-    }
-    
-    .gallery-caption {
-      padding: 1rem;
-      background: var(--paper);
-    }
-    
-    .gallery-caption h3 {
-      margin: 0 0 0.5rem;
-      font-family: "Playfair Display", serif;
-      color: var(--accent);
-      font-size: 1.2rem;
-    }
-    
-    .gallery-caption p {
-      margin: 0;
-      color: var(--muted);
-      font-size: 0.9rem;
     }
 
     /* Modal */
@@ -286,115 +289,46 @@
       <div class="masthead">
         <div>
           <h1 id="gallery-heading">Gallery</h1>
-          <div class="lede">A visual journey through our culinary creations and seasonal offerings</div>
+          <div class="lede">Experience the artistry and flavors of Cafe Amisha</div>
         </div>
-      </div>
-
-      <div class="filter-container">
-        <button class="filter-btn active" data-filter="all">All</button>
-        <button class="filter-btn" data-filter="food">Food</button>
-        <button class="filter-btn" data-filter="drinks">Drinks</button>
-        <button class="filter-btn" data-filter="seasonal">Seasonal</button>
       </div>
 
       <div class="gallery-grid">
-        <!-- Food Items -->
-        <div class="gallery-item" data-category="food">
-          <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ca4b?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Margherita Pizza">
-          <div class="gallery-caption">
-            <h3>Margherita Pizza</h3>
-            <p>Classic Italian pizza with fresh mozzarella and basil</p>
-          </div>
+        <!-- Cocktail Collection -->
+        <div class="gallery-item">
+          <img src="WhatsApp Image 1.jpeg" alt="Gallery Image 1">
         </div>
         
-        <div class="gallery-item" data-category="food">
-          <img src="https://images.unsplash.com/photo-1563379926898-05f4575a45d8?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Fresh Pasta">
-          <div class="gallery-caption">
-            <h3>Fresh Pasta</h3>
-            <p>Handmade pasta with seasonal ingredients</p>
-          </div>
+        <div class="gallery-item">
+          <img src="WhatsApp Image 2.jpeg" alt="Gallery Image 2">
         </div>
         
-        <div class="gallery-item" data-category="food">
-          <img src="https://images.unsplash.com/photo-1476224203421-9ac39bcb3327?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Tiramisu">
-          <div class="gallery-caption">
-            <h3>Tiramisu</h3>
-            <p>Classic Italian dessert with coffee and mascarpone</p>
-          </div>
+        <div class="gallery-item">
+          <img src="WhatsApp Image 3.jpeg" alt="Gallery Image 3">
         </div>
         
-        <div class="gallery-item" data-category="food">
-          <img src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Antipasti Platter">
-          <div class="gallery-caption">
-            <h3>Antipasti Platter</h3>
-            <p>Selection of cured meats, cheeses, and olives</p>
-          </div>
+        <div class="gallery-item">
+          <img src="WhatsApp Image 4.jpeg" alt="Gallery Image 4">
         </div>
         
-        <!-- Drinks Items -->
-        <div class="gallery-item" data-category="drinks">
-          <img src="https://images.unsplash.com/photo-1551024709-8f23befc6f87?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Italian Cocktails">
-          <div class="gallery-caption">
-            <h3>Italian Cocktails</h3>
-            <p>Handcrafted cocktails with Italian spirits</p>
-          </div>
+        <div class="gallery-item">
+          <img src="WhatsApp Image 5.jpeg" alt="Gallery Image 5">
         </div>
         
-        <div class="gallery-item" data-category="drinks">
-          <img src="https://images.unsplash.com/photo-1544145945-f90425340c7e?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Espresso">
-          <div class="gallery-caption">
-            <h3>Espresso</h3>
-            <p>Rich Italian coffee brewed to perfection</p>
-          </div>
+        <div class="gallery-item">
+          <img src="WhatsApp Image 6.jpeg" alt="Gallery Image 6">
         </div>
         
-        <div class="gallery-item" data-category="drinks">
-          <img src="https://images.unsplash.com/photo-1436076863939-06870fe779c2?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Italian Wine">
-          <div class="gallery-caption">
-            <h3>Italian Wine</h3>
-            <p>Selection of fine wines from Italian vineyards</p>
-          </div>
+        <div class="gallery-item">
+          <img src="WhatsApp Image 7.jpeg" alt="Gallery Image 7">
         </div>
         
-        <div class="gallery-item" data-category="drinks">
-          <img src="https://images.unsplash.com/photo-1572119865084-43d6c75f4307?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Fresh Juices">
-          <div class="gallery-caption">
-            <h3>Fresh Juices</h3>
-            <p>Seasonal fruits pressed to order</p>
-          </div>
+        <div class="gallery-item">
+          <img src="WhatsApp Image 8.jpeg" alt="Gallery Image 8">
         </div>
         
-        <!-- Seasonal Items -->
-        <div class="gallery-item" data-category="seasonal">
-          <img src="https://images.unsplash.com/photo-1574343066865-60c2e0c5b6b9?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Christmas Special">
-          <div class="gallery-caption">
-            <h3>Christmas Special</h3>
-            <p>Festive menu available during the holiday season</p>
-          </div>
-        </div>
-        
-        <div class="gallery-item" data-category="seasonal">
-          <img src="https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Summer Menu">
-          <div class="gallery-caption">
-            <h3>Summer Menu</h3>
-            <p>Light and refreshing dishes for warmer months</p>
-          </div>
-        </div>
-        
-        <div class="gallery-item" data-category="seasonal">
-          <img src="https://images.unsplash.com/photo-1570194065650-d99fb932899a?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Autumn Special">
-          <div class="gallery-caption">
-            <h3>Autumn Special</h3>
-            <p>Comforting dishes featuring seasonal produce</p>
-          </div>
-        </div>
-        
-        <div class="gallery-item" data-category="seasonal">
-          <img src="https://images.unsplash.com/photo-1570194065650-d99fb932899a?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Spring Menu">
-          <div class="gallery-caption">
-            <h3>Spring Menu</h3>
-            <p>Fresh flavors celebrating the arrival of spring</p>
-          </div>
+        <div class="gallery-item">
+          <img src="WhatsApp Image 9.jpeg" alt="Gallery Image 9">
         </div>
       </div>
     </section>
@@ -423,30 +357,9 @@
   </footer>
 
   <script>
-    // Filter functionality
+    // Gallery functionality
     document.addEventListener('DOMContentLoaded', function() {
-      const filterButtons = document.querySelectorAll('.filter-btn');
       const galleryItems = document.querySelectorAll('.gallery-item');
-      
-      filterButtons.forEach(button => {
-        button.addEventListener('click', function() {
-          // Remove active class from all buttons
-          filterButtons.forEach(btn => btn.classList.remove('active'));
-          
-          // Add active class to clicked button
-          this.classList.add('active');
-          
-          const filterValue = this.getAttribute('data-filter');
-          
-          galleryItems.forEach(item => {
-            if (filterValue === 'all' || item.getAttribute('data-category') === filterValue) {
-              item.style.display = 'block';
-            } else {
-              item.style.display = 'none';
-            }
-          });
-        });
-      });
       
       // Modal functionality
       const modal = document.getElementById('imageModal');
@@ -459,11 +372,10 @@
           const imgSrc = this.querySelector('img').getAttribute('src');
           const imgAlt = this.querySelector('img').getAttribute('alt');
           const caption = this.querySelector('h3').textContent;
-          const description = this.querySelector('p').textContent;
           
           modalImage.setAttribute('src', imgSrc);
           modalImage.setAttribute('alt', imgAlt);
-          modalCaption.innerHTML = `<h3>${caption}</h3><p>${description}</p>`;
+          modalCaption.innerHTML = `<h3>${caption}</h3>`;
           modal.style.display = 'flex';
         });
       });
