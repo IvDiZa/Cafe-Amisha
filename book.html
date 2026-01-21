@@ -43,9 +43,66 @@
         .logo-img { height: 48px; width: 120px; border-radius: 8px; object-fit: cover; border: 1px solid var(--border); }
         .logo h1 { font-family: "Playfair Display", serif; font-size: 1.6rem; color: var(--primary); margin: 0; }
 
-        nav ul { display: flex; align-items: center; gap: 1.5rem; list-style: none; margin: 0; padding: 0; }
-        nav ul li a { text-decoration: none; color: var(--text-medium); font-weight: 500; padding: 0.6rem 1.2rem; border-radius: 8px; transition: var(--transition); display: flex; align-items: center; gap: 0.5rem; }
-        nav ul li a:hover, nav ul li a.active { color: var(--primary); background: rgba(196,30,58,0.05); }
+         nav {
+            flex: 1;
+        }
+
+        nav ul {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav ul li {
+            display: flex;
+            align-items: center;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: var(--text-medium);
+            font-weight: 500;
+            font-size: 1rem;
+            padding: 0.7rem 1.4rem;
+            border-radius: var(--border-radius-sm);
+            transition: var(--transition);
+            position: relative;
+            background: none;
+            border: none;
+            cursor: pointer;
+            outline: none;
+            font-family: inherit;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        nav ul li a::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: var(--transition);
+            transform: translateX(-50%);
+        }
+
+        nav ul li a:hover,
+        nav ul li a:focus {
+            color: var(--primary);
+            background: var(--primary-light);
+        }
+
+        nav ul li a:hover::before,
+        nav ul li a:focus::before {
+            width: 70%;
+        }
+
 
         .book-btn { background: linear-gradient(135deg, var(--accent), #0f6b3f); color: var(--white) !important; border-radius: 30px; padding: 0.7rem 1.4rem; font-weight: 600; }
 
@@ -246,15 +303,10 @@
             <div class="footer-section">
                 <h3>Cafe Amisha</h3>
                 <p>Authentic Italian dining in Bermondsey. Experience seasonal ingredients and handmade pasta.</p>
-                <div class="social-links">
-                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-                </div>
             </div>
             <div class="footer-section">
                 <h3>Location</h3>
-                <p>Bermondsey, London SE1</p>
+                <p>Bermondsey, London SE1 3GH</p>
                 <p><a href="tel:+442071234567">(020) 7123-4567</a></p>
                 <p><a href="mailto:info@cafeamisha.co.uk">info@cafeamisha.co.uk</a></p>
             </div>
@@ -320,5 +372,6 @@
 </body>
 
 </html>
+
 
 
