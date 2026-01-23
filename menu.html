@@ -56,71 +56,6 @@
             font-size: 1.8rem;
         }
         
-       
-@media (max-width: 768px) {
-    header {
-        flex-wrap: wrap;
-        padding: 1rem 1.5rem;
-    }
-
-    .menu-toggle {
-        display: flex;
-    }
-
-    nav {
-        position: fixed;
-        top: 68px;
-        right: 0;
-        background: var(--white);
-        max-height: 0;
-        overflow: hidden;
-        transition: max-height 0.3s ease;
-        box-shadow: var(--shadow-hover);
-        width: 100%;
-        max-width: 280px;
-        border-radius: 0 0 12px 0;
-        z-index: 99;
-    }
-
-    nav.active {
-        max-height: 600px;
-    }
-
-    nav ul {
-        flex-direction: column;
-        gap: 0;
-        width: 100%;
-        padding: 0.8rem 0;
-        margin: 0;
-    }
-
-    nav ul li {
-        width: 100%;
-        margin: 0;
-    }
-
-    nav ul li a {
-        width: 100%;
-        text-align: left;
-        justify-content: flex-start;
-        padding: 1rem 1.5rem;
-        border-radius: 0;
-        transition: var(--transition);
-        background: transparent;
-        border-left: 3px solid transparent;
-    }
-
-    nav ul li a:hover {
-        background: rgba(196, 30, 58, 0.05);
-        border-left-color: var(--primary);
-        padding-left: 1.8rem;
-    }
-
-    nav ul li a::before {
-        display: none;
-    }
-}
-        
         /* Mobile Menu Toggle */
         .menu-toggle {
             display: none;
@@ -502,6 +437,7 @@
         @media (max-width: 768px) {
             header {
                 flex-wrap: wrap;
+                padding: 1rem 1.5rem;
             }
 
             .menu-toggle {
@@ -510,26 +446,29 @@
 
             nav {
                 position: fixed;
-                top: 70px;
-                left: 0;
+                top: 68px;
                 right: 0;
-                background: var(--white);
+                background: white;
                 max-height: 0;
                 overflow: hidden;
                 transition: max-height 0.3s ease;
-                box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+                box-shadow: 0 8px 32px rgba(44, 44, 44, 0.12);
                 width: 100%;
+                max-width: 280px;
+                border-radius: 0 0 12px 0;
+                z-index: 99;
             }
 
             nav.active {
-                max-height: 500px;
+                max-height: 600px;
             }
 
             nav ul {
                 flex-direction: column;
-                gap: 0.5rem;
+                gap: 0;
                 width: 100%;
-                padding: 1rem 0;
+                padding: 0.8rem 0;
+                margin: 0;
                 align-items: stretch;
             }
 
@@ -540,9 +479,23 @@
 
             nav ul li a {
                 width: 100%;
-                text-align: center;
-                justify-content: center;
+                text-align: left;
+                justify-content: flex-start;
                 padding: 1rem 1.5rem;
+                border-radius: 0;
+                transition: all 0.3s ease;
+                background: transparent;
+                border-left: 3px solid transparent;
+            }
+
+            nav ul li a:hover {
+                background: rgba(196, 30, 58, 0.05);
+                border-left-color: #c41e3a;
+                padding-left: 1.8rem;
+            }
+
+            nav ul li a::before {
+                display: none;
             }
 
             .menu-hero { 
@@ -1643,6 +1596,7 @@ fresh chillies
 </body>
 
 </html>
+
 
 
 
