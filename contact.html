@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -97,6 +98,10 @@
             letter-spacing: 0.5px;
             margin: 0;
             line-height: 1.2;
+        }
+        
+        nav {
+            flex: 1;
         }
             
         nav ul {
@@ -730,6 +735,12 @@
             <h1>Cafe Amisha</h1>
         </a>
 
+        <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation menu" aria-expanded="false">
+           <span></span>
+           <span></span>
+           <span></span>
+        </button>
+
         <nav id="navMenu" aria-label="Primary">
             <ul>
                 <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
@@ -739,11 +750,6 @@
                 <li><a href="contact.html"><i class="fas fa-envelope"></i> Contact</a></li>
                 <li><a href="book.html" class="book-btn"><i class="fas fa-calendar-check"></i> Reserve</a></li>
             </ul>
-            <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation menu" aria-expanded="false">
-               <span></span>
-               <span></span>
-               <span></span>
-            </button>
         </nav>
     </header>
     <!-- Hero Section -->
